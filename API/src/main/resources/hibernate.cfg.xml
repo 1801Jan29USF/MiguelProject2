@@ -4,20 +4,20 @@
 	<session-factory>
 		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-		
-		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcl</property>
+
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@orcl.c4ztagvcke0s.us-east-2.rds.amazonaws.com:1521:orcl</property>
 		<property name="hibernate.connection.username">project2</property>
 		<property name="hibernate.connection.password">p4ssw0rd</property>
-		
+
 		<!-- Some hibernate configurations -->
-		<!-- <property name="show_sql">true</property>
-		<property name="hibernate.format_sql">true</property> -->
-		
+		<!-- <property name="show_sql">true</property> <property name="hibernate.format_sql">true</property> -->
+
 		<property name="hibernate.connection.pool_size">5</property>
-		
-		<mapping class="com.revature.entities.Bear"></mapping>
-		
-		
-	
+
+		<mapping class="com.revature.entities.User"></mapping>
+		<mapping class="com.revature.entities.Event"></mapping>
+
+
+
 	</session-factory>
 </hibernate-configuration>
