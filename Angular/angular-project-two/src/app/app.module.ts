@@ -11,6 +11,8 @@ import { RegisterComponentComponent } from './register-component/register-compon
 import { SearchComponentComponent } from './search-component/search-component.component';
 import { PastEventsComponentComponent } from './past-events-component/past-events-component.component';
 import { DashboardComponentComponent } from './dashboard-component/dashboard-component.component';
+import { MapComponentComponent } from './map-component/map-component.component';
+import { AgmCoreModule} from '@agm/core';
 
 
 @NgModule({
@@ -23,10 +25,14 @@ import { DashboardComponentComponent } from './dashboard-component/dashboard-com
     RegisterComponentComponent,
     SearchComponentComponent,
     PastEventsComponentComponent,
-    DashboardComponentComponent
+    DashboardComponentComponent,
+    MapComponentComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
 package com.revature.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-//@NamedQueries({
-//		@NamedQuery(name = "findByHoneyAmountGreaterThan", query = "FROM user WHERE honeyPot.honeyAmount > :amount") })
-
 @Entity
 public class User {
 
@@ -24,19 +23,40 @@ public class User {
 	@GeneratedValue(generator = "user_id_seq", strategy = GenerationType.AUTO)
 	private int user_id;
 
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "role_id")
+	private Role role;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "host_id")
+	private List<Event> events;
+
 	@Column(name = "first_name")
 	private String firstname;
 	private String lastname;
-	private String username;
-	private String password;
-	private String address;
-	
+
 	public int getUser_id() {
 		return user_id;
 	}
 
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	public String getFirstname() {
@@ -79,12 +99,12 @@ public class User {
 		this.address = address;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getBio() {
+		return bio;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 
 	public String getEmail() {
@@ -95,44 +115,12 @@ public class User {
 		this.email = email;
 	}
 
-	public int getPhonenumber() {
+	public String getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhonenumber(int phonenumber) {
+	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
-	}
-
-	public int getRole() {
-		return role;
-	}
-
-	public void setRole(int role) {
-		this.role = role;
-	}
-
-	public Event getEvent_id() {
-		return event_id;
-	}
-
-	public void setEvent_id(Event event_id) {
-		this.event_id = event_id;
-	}
-
-	private String description;
-	private String email;
-	private int phonenumber;
-
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", firstname=" + firstname + ", lastname=" + lastname + ", username="
-				+ username + ", password=" + password + ", address=" + address + ", description=" + description
-				+ ", email=" + email + ", phonenumber=" + phonenumber + ", role=" + role + "]";
 	}
 
 	@Override
@@ -140,13 +128,14 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((bio == null) ? 0 : bio.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((events == null) ? 0 : events.hashCode());
 		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + phonenumber;
-		result = prime * result + role;
+		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + user_id;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -166,15 +155,20 @@ public class User {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (description == null) {
-			if (other.description != null)
+		if (bio == null) {
+			if (other.bio != null)
 				return false;
-		} else if (!description.equals(other.description))
+		} else if (!bio.equals(other.bio))
 			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (events == null) {
+			if (other.events != null)
+				return false;
+		} else if (!events.equals(other.events))
 			return false;
 		if (firstname == null) {
 			if (other.firstname != null)
@@ -191,9 +185,15 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (phonenumber != other.phonenumber)
+		if (phonenumber == null) {
+			if (other.phonenumber != null)
+				return false;
+		} else if (!phonenumber.equals(other.phonenumber))
 			return false;
-		if (role != other.role)
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
 			return false;
 		if (user_id != other.user_id)
 			return false;
@@ -205,28 +205,39 @@ public class User {
 		return true;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_role")
-	private int role;
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", role=" + role + ", events=" + events + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", username=" + username + ", password=" + password + ", address="
+				+ address + ", bio=" + bio + ", email=" + email + ", phonenumber=" + phonenumber + "]";
+	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "event_id")
-	private Event event_id;
+	private String username;
+	private String password;
+	private String address;
+	private String bio;
+	private String email;
+	private String phonenumber;
 
-	public User(int user_id, String firstname, String lastname, String username, String password, String address,
-			String description, String email, int phonenumber, int role, Event event_id) {
+	public User(int user_id, Role role, List<Event> events, String firstname, String lastname, String username,
+			String password, String address, String bio, String email, String phonenumber) {
 		super();
 		this.user_id = user_id;
+		this.role = role;
+		this.events = events;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
 		this.password = password;
 		this.address = address;
-		this.description = description;
+		this.bio = bio;
 		this.email = email;
 		this.phonenumber = phonenumber;
-		this.role = role;
-		this.event_id = event_id;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }
