@@ -46,9 +46,9 @@ public class EventHib implements EventDao {
 	@Override
 	public ArrayList<Event> findByTypeHQL(int type) {
 		Session se = su.getSession();
-		String hql = "FROM Event WHERE type_id LIKE ?";
+		String hql = "FROM Event WHERE UPPER(type_id) = UPPER(:type)";
 		Query q = se.createQuery(hql);
-		q.setInteger(1, type);
+		q.setInteger("type", type);
 		List<Event> events = q.list();
 		se.close();
 		return new ArrayList<>(events);
@@ -57,9 +57,9 @@ public class EventHib implements EventDao {
 	@Override
 	public ArrayList<Event> findByGenreHQL(int genre) {
 		Session se = su.getSession();
-		String hql = "FROM Event WHERE genre_id LIKE ?";
+		String hql = "FROM Event WHERE UPPER(genre_id) = UPPER(:genre)";
 		Query q = se.createQuery(hql);
-		q.setInteger(1, genre);
+		q.setInteger("genre", genre);
 		List<Event> events = q.list();
 		se.close();
 		return new ArrayList<>(events);
@@ -68,9 +68,9 @@ public class EventHib implements EventDao {
 	@Override
 	public ArrayList<Event> findByCityHQL(String city) {
 		Session se = su.getSession();
-		String hql = "FROM Event WHERE address LIKE ?";
+		String hql = "FROM Event WHERE UPPER(event_location) = UPPER(:event_location)";
 		Query q = se.createQuery(hql);
-		q.setString(1, "%" + city + "%");
+		q.setString("event_location", city);
 		List<Event> events = q.list();
 		se.close();
 		return new ArrayList<>(events);

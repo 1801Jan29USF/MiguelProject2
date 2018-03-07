@@ -36,18 +36,26 @@ public class Tests {
 		// LOAD BY ID WORKING
 		// log.trace("result of loadById" + udao.loadById(12));
 
-		// MERGE BY ID
-		Role role = new Role(0, "HOST");
-		User b = new User(12, role, "Miguel", "World", "in2", "a", "a", "a", "HelloWorld2@sgmail.com", "a");
+		// MERGE BY ID WORKING
+//		Role role = new Role(0, "HOST");
+//		User b = new User(12, role, "Miguel", "World", "in2", "a", "a", "a", "HelloWorld2@sgmail.com", "a");
 		// log.trace("result of mergeById " + udao.merge(b));
 
-		// SAVE EVENT
-		Type type = new Type(0, "MUSIC");
-		Genre genre = new Genre(0, "ROCK");
-		Event e = new Event(0, "Miguel's Show", "It's gonna rock", "Everywhere", "Feb 1st", 100, "4444444", null, type,
-				null, genre, b);
-		edao.save(e);
+		// SAVE EVENT WORKING
+//		Type type = new Type(0, "MUSIC");
+//		Genre genre = new Genre(0, "ROCK");
+//		Event e = new Event(0, "Miguel's Show", "It's gonna rock", "Everywhere", "Feb 1st", 100, "4444444", null, type,
+//				null, genre, b);
+//		edao.save(e);
+		
+		//FindByTypeHQL WORKING
+//	  log.info(edao.findByTypeHQL(0));
 
+		//FindByGenre WORKING
+//		log.info(edao.findByGenreHQL(0));
+		
+		//FindByCity
+		log.info(edao.findByCityHQL("Everywhere"));
 	}
 
 }
