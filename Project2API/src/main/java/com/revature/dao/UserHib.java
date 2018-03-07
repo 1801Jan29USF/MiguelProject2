@@ -3,7 +3,6 @@ package com.revature.dao;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.revature.entities.User;
 import com.revature.util.SessionUtil;
 
@@ -21,17 +20,6 @@ public class UserHib implements UserDao {
 		se.close();
 		return u;
 	}
-
-	// @Override
-	// public User persisf(User u) {
-	// Session se = su.getSession();
-	// Transaction tx = se.beginTransaction();
-	// se.persist(u); // u is now a persistent object
-	// log.trace("The generated id is: " + u.getUser_id());
-	// tx.commit();
-	// se.close();
-	// return u;
-	// }
 
 	@Override
 	public User getById(int id) {
@@ -54,6 +42,8 @@ public class UserHib implements UserDao {
 	public User merge(User u) {
 		Session se = su.getSession();
 		Transaction tx = se.beginTransaction();
+		User u2 = loadById(u.getUser_id());
+		se.update(u2);
 		User persistant = (User) se.merge(u);
 		tx.commit();
 		se.close();

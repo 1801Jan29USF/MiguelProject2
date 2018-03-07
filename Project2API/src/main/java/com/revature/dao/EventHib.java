@@ -20,36 +20,15 @@ public class EventHib implements EventDao {
 		Session se = su.getSession();
 		Transaction tx = se.beginTransaction();
 		int id = (int) se.save(e); // e is now a persistent object
-		log.trace("The generated id is: " + id);
 		tx.commit();
 		se.close();
 		return e;
 	}
 
-	// @Override
-	// public Event persist(Event u) {
-	// Session se = su.getSession();
-	// Transaction tx = se.beginTransaction();
-	// se.persist(u); // u is now a persistent object
-	// log.trace("The generated id is: " + u.getEvent_id());
-	// tx.commit();
-	// se.close();
-	// return u;
-	// }
-
 	@Override
 	public Event getById(int id) {
 		Session se = su.getSession();
 		Event e = (Event) se.get(Event.class, id);
-		se.close();
-		return e;
-	}
-
-	@Override
-	public Event loadById(int id) {
-		Session se = su.getSession();
-		Event e = (Event) se.load(Event.class, id);
-		e.getEvent_id(); // accessing a field will retreive the proxy
 		se.close();
 		return e;
 	}
@@ -96,4 +75,5 @@ public class EventHib implements EventDao {
 		se.close();
 		return new ArrayList<>(events);
 	}
+
 }

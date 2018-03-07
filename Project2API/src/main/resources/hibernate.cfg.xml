@@ -17,6 +17,9 @@
 		<mapping class="com.revature.entities.User"></mapping>
 		<mapping class="com.revature.entities.Event"></mapping>
 		<mapping class="com.revature.entities.Role"></mapping>
+		<mapping class="com.revature.entities.Genre"></mapping>
+		<mapping class="com.revature.entities.Type"></mapping>
+		<mapping class="com.revature.entities.Status"></mapping>
 
 
 

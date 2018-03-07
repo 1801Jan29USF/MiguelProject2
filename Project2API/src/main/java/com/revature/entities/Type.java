@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "type_id")
+@Table(name = "event_type")
 public class Type {
 
 	@Id
-	@Column(name = "type")
+	@Column(name = "event_type_id")
 	private int event_type_id;
 
 	private String event_type;

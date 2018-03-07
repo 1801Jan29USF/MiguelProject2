@@ -11,8 +11,6 @@ public interface EventDao {
 	// R
 	Event getById(int id);
 
-	Event loadById(int id);
-
 	// D
 	Event merge(Event e);
 

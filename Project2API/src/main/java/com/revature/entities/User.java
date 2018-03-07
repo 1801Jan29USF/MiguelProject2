@@ -1,7 +1,5 @@
 package com.revature.entities;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
 
 	@Id
@@ -27,100 +26,40 @@ public class User {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "host_id")
-	private List<Event> events;
+	private String first_name;
+	private String last_name;
+	private String username;
+	private String user_password;
+	private String address;
+	private String bio;
+	private String email;
+	private String phone_number;
 
-	@Column(name = "first_name")
-	private String firstname;
-	private String lastname;
-
-	public int getUser_id() {
-		return user_id;
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setUser_id(int user_id) {
+	public User(int user_id, Role role, String first_name, String last_name, String username, String user_password,
+			String address, String bio, String email, String phone_number) {
+		super();
 		this.user_id = user_id;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-
-	public String getFirstname() {
-		return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
+		this.first_name = first_name;
+		this.last_name = last_name;
 		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
+		this.user_password = user_password;
 		this.address = address;
-	}
-
-	public String getBio() {
-		return bio;
-	}
-
-	public void setBio(String bio) {
 		this.bio = bio;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
 		this.email = email;
+		this.phone_number = phone_number;
 	}
 
-	public String getPhonenumber() {
-		return phonenumber;
-	}
-
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", role=" + role + ", first_name=" + first_name + ", last_name=" + last_name
+				+ ", username=" + username + ", user_password=" + user_password + ", address=" + address + ", bio="
+				+ bio + ", email=" + email + ", phone_number=" + phone_number + "]";
 	}
 
 	@Override
@@ -130,13 +69,12 @@ public class User {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((bio == null) ? 0 : bio.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((events == null) ? 0 : events.hashCode());
-		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
+		result = prime * result + ((first_name == null) ? 0 : first_name.hashCode());
+		result = prime * result + ((last_name == null) ? 0 : last_name.hashCode());
+		result = prime * result + ((phone_number == null) ? 0 : phone_number.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + user_id;
+		result = prime * result + ((user_password == null) ? 0 : user_password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -165,30 +103,20 @@ public class User {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (events == null) {
-			if (other.events != null)
+		if (first_name == null) {
+			if (other.first_name != null)
 				return false;
-		} else if (!events.equals(other.events))
+		} else if (!first_name.equals(other.first_name))
 			return false;
-		if (firstname == null) {
-			if (other.firstname != null)
+		if (last_name == null) {
+			if (other.last_name != null)
 				return false;
-		} else if (!firstname.equals(other.firstname))
+		} else if (!last_name.equals(other.last_name))
 			return false;
-		if (lastname == null) {
-			if (other.lastname != null)
+		if (phone_number == null) {
+			if (other.phone_number != null)
 				return false;
-		} else if (!lastname.equals(other.lastname))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (phonenumber == null) {
-			if (other.phonenumber != null)
-				return false;
-		} else if (!phonenumber.equals(other.phonenumber))
+		} else if (!phone_number.equals(other.phone_number))
 			return false;
 		if (role == null) {
 			if (other.role != null)
@@ -196,6 +124,11 @@ public class User {
 		} else if (!role.equals(other.role))
 			return false;
 		if (user_id != other.user_id)
+			return false;
+		if (user_password == null) {
+			if (other.user_password != null)
+				return false;
+		} else if (!user_password.equals(other.user_password))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -205,39 +138,84 @@ public class User {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", role=" + role + ", events=" + events + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", username=" + username + ", password=" + password + ", address="
-				+ address + ", bio=" + bio + ", email=" + email + ", phonenumber=" + phonenumber + "]";
+	public int getUser_id() {
+		return user_id;
 	}
 
-	private String username;
-	private String password;
-	private String address;
-	private String bio;
-	private String email;
-	private String phonenumber;
-
-	public User(int user_id, Role role, List<Event> events, String firstname, String lastname, String username,
-			String password, String address, String bio, String email, String phonenumber) {
-		super();
+	public void setUser_id(int user_id) {
 		this.user_id = user_id;
-		this.role = role;
-		this.events = events;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.password = password;
-		this.address = address;
-		this.bio = bio;
-		this.email = email;
-		this.phonenumber = phonenumber;
 	}
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUser_password() {
+		return user_password;
+	}
+
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
 	}
 
 }
