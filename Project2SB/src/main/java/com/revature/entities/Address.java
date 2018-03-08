@@ -1,7 +1,6 @@
 package com.revature.entities;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -13,9 +12,10 @@ import javax.persistence.Table;
 @Table(name = "address")
 public class Address {
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id")
-	private User address_id;
+	@Id
+	private int address_id;
+	
+	
 
 	public User getAddress_id() {
 		return address_id;
