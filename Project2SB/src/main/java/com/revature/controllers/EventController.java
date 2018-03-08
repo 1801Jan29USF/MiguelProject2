@@ -1,23 +1,25 @@
 package com.revature.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.entities.User;
-import com.revature.services.UserService;
+import com.revature.entities.Event;
+import com.revature.services.EventService;
 
 @RestController
-@RequestMapping("users")
-public class UserController {
+@RequestMapping("events")
+public class EventController {
 	
 	@Autowired
-	private UserService us;
+	private EventService es;
 	
 	@PostMapping
-	public User createUser(@RequestBody User u) {
-		return us.save(u);
+	public Event createEvent(@Valid @RequestBody Event e) {
+		return es.save(e);
 	}
 }

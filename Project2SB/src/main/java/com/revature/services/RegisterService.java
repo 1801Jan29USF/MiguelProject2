@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.revature.entities.User;
 
-public interface UserService {
+public interface RegisterService {
 	
 	User save(User u);
 	

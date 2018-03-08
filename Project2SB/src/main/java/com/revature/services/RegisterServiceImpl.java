@@ -4,16 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.User;
-import com.revature.repos.UserRepo;
+import com.revature.repos.RegisterRepo;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class RegisterServiceImpl implements RegisterService {
 	
 	@Autowired
-	private UserRepo ur;
+	private RegisterRepo rr;
 
 	@Override
 	public User save(User u) {
-		return ur.save(u);
+		return rr.save(u);
 	}
 }
