@@ -76,4 +76,16 @@ public class EventHib implements EventDao {
 		return new ArrayList<>(events);
 	}
 
+	// need to test
+	@Override
+	public ArrayList<Event> findByHostHQL(int host) {
+		Session se = su.getSession();
+		String hql = "FROM Event WHERE UPPER(host_id) = UPPER(:host_id)";
+		Query q = se.createQuery(hql);
+		q.setInteger("host_id", host);
+		List<Event> events = q.list();
+		se.close();
+		return new ArrayList<>(events);
+	}
+
 }

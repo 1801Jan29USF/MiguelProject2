@@ -14,12 +14,12 @@ public class SessionUtil {
 		// represents an entire set of mappings of an application's Java types to an SQL
 		// database.Used to build an immutable org.hibernate.SessionFactory.
 		Configuration conf = new Configuration().configure();
-		
-		//read configuration from hibernate xml and build Service Registry
+
+		// read configuration from hibernate xml and build Service Registry
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties())
 				.build();
-		
-		//build the session factory
+
+		// build the session factory
 		sf = conf.buildSessionFactory(serviceRegistry);
 	}
 

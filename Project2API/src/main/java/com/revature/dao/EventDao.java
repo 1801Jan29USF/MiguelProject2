@@ -19,5 +19,7 @@ public interface EventDao {
 	ArrayList<Event> findByGenreHQL(int genre);
 
 	ArrayList<Event> findByCityHQL(String city);
+	
+	ArrayList<Event> findByHostHQL(int host);
 
 }
