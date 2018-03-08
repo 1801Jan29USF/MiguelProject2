@@ -3,7 +3,7 @@
 /*******************************************************************************
    Drop database if it exists
 ********************************************************************************/
-DROP USER ers CASCADE;
+DROP USER project2 CASCADE;
 
 /*******************************************************************************
    Create database
@@ -16,13 +16,13 @@ QUOTA 10M ON users;
 
 GRANT connect to project2;
 GRANT resource to project2;
-GRANT create session TO project2
+GRANT create session TO project2;
 GRANT create table TO project2;
 GRANT create view TO project2;
 
 
 
-conn ers/p4ssw0rd
+conn project2/p4ssw0rd
 
 
 /*******************************************************************************
@@ -31,27 +31,37 @@ conn ers/p4ssw0rd
 
 CREATE TABLE users
 (
-    user_id number unique,
+    user_id number,
     username varchar2(50) unique,
     user_password varchar2(50) not null,
     first_name varchar2(50) not null,
     last_name varchar2(50) not null,
-    address varchar2(150) unique not null,
+    address_id number not null,
     bio varchar2(250),
     email varchar2(50) unique not null,
-    phone_number number,
-    user_role_id number,
-    event_id number,
+    phone_number varchar2(50),
+    role_id number,
     constraint user_pk primary key (user_id)
 );
 
+
 /*******************************************************************************
-   Users Foreign Keys
+   Address Table
+********************************************************************************/
+create table address (
+address_id number primary key,
+address_street varchar2(50) not null,
+address_city varchar2(50) not null,
+address_state varchar2(50) not null,
+address_zipcode varchar2(50) not null
+);
+
+/*******************************************************************************
+   Address Foreign Keys
 ********************************************************************************/
 
-alter table users add constraint user_role_fk
-foreign key (user_role_id) REFERENCES user_roles (user_role_id); 
-
+alter table address add constraint address_fk
+foreign key (address_id) REFERENCES users (user_id); 
 
 /*******************************************************************************
    User Role Table
@@ -65,11 +75,18 @@ create table user_role
 );
 
 /*******************************************************************************
-  Event Table
+   Users Foreign Keys
 ********************************************************************************/
 
+alter table users add constraint user_role_fk
+foreign key (role_id) REFERENCES user_role (user_role_id); 
+
+/*******************************************************************************
+  Event Table
+********************************************************************************/
 create table event(
 event_id number primary key not null,
+host_id number not null,
 event_name varchar2(200)  not null,
 description varchar2(200) not null, 
 event_location varchar2(200) not null,
@@ -78,21 +95,31 @@ capacity number,
 phone_number number not null, 
 attachment blob,
 type_id number,
+status_id number,
 genre_id number
 );
 
 /*******************************************************************************
-   Event Type Foreign Key
+  Event Table
 ********************************************************************************/
-alter table event add constraint event_type_fk
-foreign key (type_id) REFERENCES event_type (event_type_id);
-
+alter table event add constraint host_id_fk
+foreign key (host_id) REFERENCES users (user_id);
 
 /*******************************************************************************
-   Genre Foreign Key
+  Status Table
 ********************************************************************************/
-alter table event add constraint genre_fk
-foreign key (genre_id) REFERENCES genre (genre_id);
+create table status (
+status_id number primary key not null,
+status varchar2(50)
+
+);
+
+/*******************************************************************************
+   Status Foreign Key
+********************************************************************************/
+alter table event add constraint event_status_fk
+foreign key (status_id) REFERENCES status (status_id);
+
 
 
 /*******************************************************************************
@@ -105,12 +132,25 @@ event_type varchar2(50)
 );
 
 /*******************************************************************************
+   Event Type Foreign Key
+********************************************************************************/
+alter table event add constraint event_type_fk
+foreign key (type_id) REFERENCES event_type (event_type_id);
+
+
+/*******************************************************************************
   Genre Table
 ********************************************************************************/
 create table genre (
 genre_id number primary key not null,
 genre_type varchar2(30)
 );
+
+/*******************************************************************************
+   Genre Foreign Key
+********************************************************************************/
+alter table event add constraint genre_fk
+foreign key (genre_id) REFERENCES genre (genre_id);
 
 
 
