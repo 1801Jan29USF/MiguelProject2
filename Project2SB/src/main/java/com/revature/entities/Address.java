@@ -13,44 +13,49 @@ import javax.persistence.Table;
 public class Address {
 
 	@Id
-	@SequenceGenerator(name = "address_id_seq", sequenceName = "address_id_seq", allocationSize = 1)
+	@SequenceGenerator(name = "address_id_seq", sequenceName = "address_id_seq")
 	@GeneratedValue(generator = "address_id_seq", strategy = GenerationType.AUTO)
 	@Column(name = "address_id")
-	private int address_id;
+	private int id;
 
-	private String address_street;
-	private String address_city;
-	private String address_state;
-	private String address_zipcode;
+	@Column(name = "address_street")
+	private String street;
+	@Column(name = "address_city")
+	private String city;
+	@Column(name = "address_state")
+	private String state;
+	@Column(name = "address_zipcode")
+	private String zipcode;
 
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Address(String address_street, String address_city, String address_state, String address_zipcode) {
+	public Address(int id, String street, String city, String state, String zipcode) {
 		super();
-		this.address_street = address_street;
-		this.address_city = address_city;
-		this.address_state = address_state;
-		this.address_zipcode = address_zipcode;
+		this.id = id;
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zipcode = zipcode;
 	}
 
 	@Override
 	public String toString() {
-		return "Address [address_id=" + address_id + ", address_street=" + address_street + ", address_city="
-				+ address_city + ", address_state=" + address_state + ", address_zipcode=" + address_zipcode + "]";
+		return "Address [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state + ", zipcode="
+				+ zipcode + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address_city == null) ? 0 : address_city.hashCode());
-		result = prime * result + address_id;
-		result = prime * result + ((address_state == null) ? 0 : address_state.hashCode());
-		result = prime * result + ((address_street == null) ? 0 : address_street.hashCode());
-		result = prime * result + ((address_zipcode == null) ? 0 : address_zipcode.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
 	}
 
@@ -63,69 +68,69 @@ public class Address {
 		if (getClass() != obj.getClass())
 			return false;
 		Address other = (Address) obj;
-		if (address_city == null) {
-			if (other.address_city != null)
+		if (city == null) {
+			if (other.city != null)
 				return false;
-		} else if (!address_city.equals(other.address_city))
+		} else if (!city.equals(other.city))
 			return false;
-		if (address_id != other.address_id)
+		if (id != other.id)
 			return false;
-		if (address_state == null) {
-			if (other.address_state != null)
+		if (state == null) {
+			if (other.state != null)
 				return false;
-		} else if (!address_state.equals(other.address_state))
+		} else if (!state.equals(other.state))
 			return false;
-		if (address_street == null) {
-			if (other.address_street != null)
+		if (street == null) {
+			if (other.street != null)
 				return false;
-		} else if (!address_street.equals(other.address_street))
+		} else if (!street.equals(other.street))
 			return false;
-		if (address_zipcode == null) {
-			if (other.address_zipcode != null)
+		if (zipcode == null) {
+			if (other.zipcode != null)
 				return false;
-		} else if (!address_zipcode.equals(other.address_zipcode))
+		} else if (!zipcode.equals(other.zipcode))
 			return false;
 		return true;
 	}
 
-	public int getAddress_id() {
-		return address_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setAddress_id(int address_id) {
-		this.address_id = address_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getAddress_street() {
-		return address_street;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setAddress_street(String address_street) {
-		this.address_street = address_street;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
-	public String getAddress_city() {
-		return address_city;
+	public String getCity() {
+		return city;
 	}
 
-	public void setAddress_city(String address_city) {
-		this.address_city = address_city;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getAddress_state() {
-		return address_state;
+	public String getState() {
+		return state;
 	}
 
-	public void setAddress_state(String address_state) {
-		this.address_state = address_state;
+	public void setState(String state) {
+		this.state = state;
 	}
 
-	public String getAddress_zipcode() {
-		return address_zipcode;
+	public String getZipcode() {
+		return zipcode;
 	}
 
-	public void setAddress_zipcode(String address_zipcode) {
-		this.address_zipcode = address_zipcode;
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 
 }

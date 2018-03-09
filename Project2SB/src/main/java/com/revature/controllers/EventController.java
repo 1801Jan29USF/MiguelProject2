@@ -1,6 +1,6 @@
 package com.revature.controllers;
 
-import javax.validation.Valid;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +14,28 @@ import com.revature.services.EventService;
 @RestController
 @RequestMapping("events")
 public class EventController {
-	
+
 	@Autowired
 	private EventService es;
-	
+
 	@PostMapping
-	public Event createEvent(@Valid @RequestBody Event e) {
+	public Event createEvent(@RequestBody Event e) {
 		return es.save(e);
 	}
+
+	@PostMapping("events/q={type}")
+	public ArrayList<Event> findAllByType(@RequestBody String type) {
+		return es.findAllByType(type);
+	}
+
+	@PostMapping("events/q={genre}")
+	public ArrayList<Event> findAllByGenre(@RequestBody String genre) {
+		return es.findAllByGenre(genre);
+	}
+
+	@PostMapping("events/q={id}")
+	public ArrayList<Event> findAllByUserId(@RequestBody int id) {
+		return es.findAllByHostId(id);
+	}
+
 }

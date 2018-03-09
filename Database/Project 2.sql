@@ -108,6 +108,7 @@ foreign key (host_id) REFERENCES users (user_id);
 /*******************************************************************************
   Status Table
 ********************************************************************************/
+
 create table status (
 status_id number primary key not null,
 status varchar2(50)

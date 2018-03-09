@@ -1,7 +1,5 @@
 package com.revature.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +14,10 @@ import com.revature.services.LoginService;
 public class LoginController {
 
 	@Autowired
-	private LoginService rs;
-	
+	private LoginService ls;
+
 	@PostMapping
-	public User loginUser(@RequestBody String username) {
-		System.out.println("USER = " + rs.findByUsername(username));
-		return null;
+	public User loginUser(@RequestBody String credential) {
+		return ls.findByUsername(credential);
 	}
 }

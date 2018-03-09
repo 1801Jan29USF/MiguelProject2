@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.revature.entities.User;
 
 @Repository
-public interface LoginRepo extends JpaRepository<User, String> {
+public interface LoginRepo extends JpaRepository<User, Integer> {
 
 	User findByUsername(String username);
 
