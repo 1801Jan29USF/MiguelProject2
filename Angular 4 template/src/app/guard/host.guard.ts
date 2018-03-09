@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
-export class LoggedInGuard implements CanActivate {
+export class HostGuard implements CanActivate {
 
-  constructor(private cookie: CookieService, private router: Router) {}
+  constructor(private Cookie: CookieService, private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('checking cookie');
-    if (this.cookie.getObject('tickets')) {
+    if (this.Cookie.get('host')) {
       return true;
     } else {
-      this.router.navigateByUrl('/login');
+      this.Cookie.get('host');
+      this.router.navigateByUrl('/dashboard');
     }
   }
 }

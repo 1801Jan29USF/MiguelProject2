@@ -8,10 +8,8 @@ import { RouterModule } from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {NavComponent} from './nav/nav.component';
-
 import { appRoutes } from './routes';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { LoggedInGuard } from './guard/logged-in.guard';
 import { User } from './beans/user';
 import { HomepageComponent } from './project2/homepage/homepage.component';
 import { DashboardComponent } from './Project2/dashboard/dashboard.component';
@@ -21,6 +19,8 @@ import { CreateeventComponent } from './Project2/createevent/createevent.compone
 import { PasteventsComponent } from './Project2/pastevents/pastevents.component';
 import { Project2loginComponent } from './Project2/project2login/project2login.component';
 import { Project2registerComponent } from './Project2/project2register/project2register.component';
+import { AttendeeGuard } from './guard/attendee.guard';
+import { HostGuard } from './guard/host.guard';
 
 
 
@@ -48,7 +48,8 @@ import { Project2registerComponent } from './Project2/project2register/project2r
   ],
   providers: [
     CookieService,
-    LoggedInGuard,
+    AttendeeGuard,
+    HostGuard,
     User
 
   ],
