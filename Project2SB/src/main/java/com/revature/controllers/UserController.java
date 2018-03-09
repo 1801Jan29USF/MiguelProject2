@@ -9,28 +9,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.entities.Event;
+import com.revature.entities.User;
 import com.revature.services.EventService;
+import com.revature.services.UserService;
 
 @RestController
-@RequestMapping("events")
-public class EventController {
+@RequestMapping("user")
+public class UserController {
 
 	@Autowired
 	private EventService es;
 
-	@PostMapping
-	public Event createEvent(@RequestBody Event e) {
-		return es.save(e);
+	@Autowired
+	private UserService us;
+
+	@PostMapping("/pastevents")
+	public ArrayList<Event> findAll(@RequestBody User u) {
+
+		return es.findAllById(u.getUser_id());
 	}
 
-	@PostMapping("events/q= {type}")
-	public ArrayList<Event> findAllByType(@RequestBody String type) {
-		return es.findAllByType(type);
-	}
-
-	@PostMapping("events/q= {genre}")
-	public ArrayList<Event> findAllByGenre(@RequestBody String genre) {
-		return es.findAllByGenre(genre);
+	@PostMapping("/updateprofile")
+	public User save(@RequestBody User u) {
+		return us.save(u);
 	}
 
 }

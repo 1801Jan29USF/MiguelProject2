@@ -4,17 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.User;
-import com.revature.repos.LoginRepo;
+import com.revature.repos.UserRepo;
 
 @Service
-public class LoginServiceImpl implements LoginService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private LoginRepo lr;
+	private UserRepo ur;
 
 	@Override
-	public User findByUsername(String username) {
-		return lr.findByUsername(username);
+	public User save(User u) {
+		return ur.save(u);
+
 	}
 
 }

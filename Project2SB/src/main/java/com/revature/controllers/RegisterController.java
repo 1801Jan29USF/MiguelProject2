@@ -14,13 +14,13 @@ import com.revature.services.RegisterService;
 @RestController
 @RequestMapping("register")
 public class RegisterController {
-	
+
 	@Autowired
 	private RegisterService rs;
-	
+
 	@PostMapping
 	public User createUser(@Valid @RequestBody User u) {
-		
-		return rs.save(u);
+
+		return rs.findByUsername(u);
 	}
 }

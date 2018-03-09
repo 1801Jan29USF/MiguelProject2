@@ -8,4 +8,6 @@ import com.revature.entities.User;
 @Repository
 public interface RegisterRepo extends JpaRepository<User, Integer> {
 
+	User findByUsername(String username);
+
 }
