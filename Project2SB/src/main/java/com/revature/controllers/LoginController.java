@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.entities.User;
-import com.revature.services.RegisterService;
+import com.revature.services.LoginService;
 
 @RestController
-@RequestMapping("register")
-public class RegisterController {
-	
+@RequestMapping("login")
+public class LoginController {
+
 	@Autowired
-	private RegisterService rs;
+	private LoginService rs;
 	
 	@PostMapping
-	public User createUser(@Valid @RequestBody User u) {
-		
-		return rs.save(u);
+	public User loginUser(@RequestBody String username) {
+		System.out.println("USER = " + rs.findByUsername(username));
+		return null;
 	}
 }

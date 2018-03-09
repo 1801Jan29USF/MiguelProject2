@@ -36,7 +36,7 @@ CREATE TABLE users
     user_password varchar2(50) not null,
     first_name varchar2(50) not null,
     last_name varchar2(50) not null,
-    address_id number not null,
+    address_id number,
     bio varchar2(250),
     email varchar2(50) unique not null,
     phone_number varchar2(50),
@@ -60,8 +60,8 @@ address_zipcode varchar2(50) not null
    Address Foreign Keys
 ********************************************************************************/
 
-alter table address add constraint address_fk
-foreign key (address_id) REFERENCES users (user_id); 
+alter table users add constraint address_fk
+foreign key (address_id) REFERENCES address (address_id); 
 
 /*******************************************************************************
    User Role Table
@@ -162,34 +162,49 @@ create sequence user_id_seq start with 1;
 
 CREATE SEQUENCE event_id_seq START WITH 1;
 
+CREATE SEQUENCE address_id_seq START WITH 1;
+
 /*******************************************************************************
    Triggers
 ********************************************************************************/
 
-CREATE OR REPLACE TRIGGER user_id_trigger
-BEFORE INSERT OR UPDATE on users
-FOR EACH ROW
-BEGIN
-    IF INSERTING THEN
-        SELECT user_id_seq.nextVal INTO :new.user_id FROM dual;
-    ELSIF UPDATING THEN
-        SELECT :old.user_id INTO :new.user_id FROM dual;
-    END IF;
-END;
-/
-
-
-CREATE OR REPLACE TRIGGER event_id_trigger
-BEFORE INSERT OR UPDATE on event
-FOR EACH ROW
-BEGIN
-    IF INSERTING THEN
-        SELECT event_id_seq.nextVal INTO :new.event_id FROM dual;
-    ELSIF UPDATING THEN
-        SELECT :old.event_id INTO :new.event_id FROM dual;
-    END IF;
-END;
-/
+--CREATE OR REPLACE TRIGGER user_id_trigger
+--BEFORE INSERT OR UPDATE on users
+--FOR EACH ROW
+--BEGIN
+--    IF INSERTING THEN
+--        SELECT user_id_seq.nextVal INTO :new.user_id FROM dual;
+--    ELSIF UPDATING THEN
+--        SELECT :old.user_id INTO :new.user_id FROM dual;
+--    END IF;
+--END;
+--/
+--
+--CREATE OR REPLACE TRIGGER address_id_trigger
+--BEFORE INSERT OR UPDATE on address
+--FOR EACH ROW
+--BEGIN
+--    IF INSERTING THEN
+--        SELECT address_id_seq.nextVal INTO :new.address_id FROM dual;
+--    ELSIF UPDATING THEN
+--        SELECT :old.address_id INTO :new.address_id FROM dual;
+--    END IF;
+--END;
+--/
+--
+--
+--
+--CREATE OR REPLACE TRIGGER event_id_trigger
+--BEFORE INSERT OR UPDATE on event
+--FOR EACH ROW
+--BEGIN
+--    IF INSERTING THEN
+--        SELECT event_id_seq.nextVal INTO :new.event_id FROM dual;
+--    ELSIF UPDATING THEN
+--        SELECT :old.event_id INTO :new.event_id FROM dual;
+--    END IF;
+--END;
+--/
 
 commit;
 exit;
