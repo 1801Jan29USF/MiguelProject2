@@ -4,11 +4,12 @@
 <!------ Include the above in your HEAD tag ---------->
 
 
-<!DOCTYPE html><html class=''>
+<!DOCTYPE html><html>
 <head><script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/nikhil/pen/sicrK?limit=all&page=31&q=contact+" />
 
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'><script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
-<style class="cp-pen-styles">@import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css");
+<style class="cp-pen-styles">
+@import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css");
 .menu, .menu-bar {
     position: fixed;
     top: 0;
@@ -147,29 +148,35 @@
   .menu{
         height:3.5em;
     }
-}</style></head><body>
+}
+
+</style>
+
+</head>
+<body>
  <ul class="menu">
 
-      <li title="Home"><a href="#" class="menu-button home">menu</a></li>
+      <li title="Home"><a class="menu-button home">menu</a></li>
+
+      <li><button type="button" class="btn btn-outline-secondary" triggers="mouseenter:mouseleave" popoverTitle="Pop title" routerLink="project2login">
+      Log in 
+      </button></li>
+
+     <li><button type="button" class="btn btn-outline-secondary" triggers="mouseenter:mouseleave" popoverTitle="Pop title" routerLink="project2register">
+        Signup
+     </button></li>
+
       <li title="Search Event"><a class="search" routerLink="/searchevent">Search Event</a></li>
       <li title="Submit Event"><a class="pencil" routerLink="/createevent">Submit Event</a></li>
       <li title="Profile"><a class="active about" routerLink="/bio">Profile</a></li>
       <li title="History Event"><a class="archive" routerLink="/pastevents">Past Event</a></li>
-      <li title="Contact"><a href="#" class="contact">contact</a></li>
+      <li title="Contact"><a class="contact">contact</a></li>
+      
+      
     </ul>
     
-    <ul class="menu-bar">
-        <li><a href="#" class="menu-button">Menu</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Editorial</a></li>
-        <li><a href="#">About</a></li>
-    </ul>
+    
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script >$(document).ready(function(){
-$(".menu-button").click(function(){
-$(".menu-bar").toggleClass( "open" );
-})
-})
-</script>
-</body></html>
+
+</body>
+</html>
