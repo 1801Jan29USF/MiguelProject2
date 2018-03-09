@@ -1,7 +1,5 @@
 package com.revature.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +17,7 @@ public class RegisterController {
 	private RegisterService rs;
 
 	@PostMapping
-	public User createUser(@Valid @RequestBody User u) {
+	public User createUser(@RequestBody User u) {
 
 		return rs.findByUsername(u);
 	}

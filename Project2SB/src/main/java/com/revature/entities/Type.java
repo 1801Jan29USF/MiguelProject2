@@ -11,32 +11,33 @@ public class Type {
 
 	@Id
 	@Column(name = "event_type_id")
-	private int event_type_id;
+	private int id;
 
-	private String event_type;
+	@Column(name = "event_type")
+	private String type;
 
 	public Type() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Type(int event_type_id, String event_type) {
+	public Type(int id, String type) {
 		super();
-		this.event_type_id = event_type_id;
-		this.event_type = event_type;
+		this.id = id;
+		this.type = type;
 	}
 
 	@Override
 	public String toString() {
-		return "Type [event_type_id=" + event_type_id + ", event_type=" + event_type + "]";
+		return "Type [id=" + id + ", type=" + type + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((event_type == null) ? 0 : event_type.hashCode());
-		result = prime * result + event_type_id;
+		result = prime * result + id;
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -49,30 +50,30 @@ public class Type {
 		if (getClass() != obj.getClass())
 			return false;
 		Type other = (Type) obj;
-		if (event_type == null) {
-			if (other.event_type != null)
-				return false;
-		} else if (!event_type.equals(other.event_type))
+		if (id != other.id)
 			return false;
-		if (event_type_id != other.event_type_id)
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}
 
-	public int getEvent_type_id() {
-		return event_type_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setEvent_type_id(int event_type_id) {
-		this.event_type_id = event_type_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getEvent_type() {
-		return event_type;
+	public String getType() {
+		return type;
 	}
 
-	public void setEvent_type(String event_type) {
-		this.event_type = event_type;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

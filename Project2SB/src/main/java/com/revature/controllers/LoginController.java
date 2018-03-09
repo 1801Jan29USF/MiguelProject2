@@ -14,10 +14,10 @@ import com.revature.services.LoginService;
 public class LoginController {
 
 	@Autowired
-	private LoginService rs;
-	
+	private LoginService ls;
+
 	@PostMapping
-	public User loginUser(@RequestBody String username) {
-		return rs.findByUsername(username);
+	public User loginUser(@RequestBody String credential) {
+		return ls.findByUsername(credential);
 	}
 }

@@ -25,8 +25,7 @@ public class UserController {
 
 	@PostMapping("/pastevents")
 	public ArrayList<Event> findAll(@RequestBody User u) {
-
-		return es.findAllById(u.getUser_id());
+		return es.findAllByHostId(u.getId());
 	}
 
 	@PostMapping("/updateprofile")

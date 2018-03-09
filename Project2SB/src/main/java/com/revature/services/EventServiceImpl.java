@@ -30,9 +30,9 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public ArrayList<Event> findAllById(int user_id) {
-		// TODO Auto-generated method stub
-		return er.findAllById(user_id);
+	public ArrayList<Event> findAllByHostId(int id) {
+
+		return er.findAllByHostId(id);
 	}
 
 }

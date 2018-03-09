@@ -23,53 +23,171 @@ public class Event {
 	@Column(name = "event_id")
 	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq")
 	@GeneratedValue(generator = "event_id_seq", strategy = GenerationType.AUTO)
-	private int event_id;
+	private int id;
 
 	@Column(name = "event_name")
-	private String event_name;
+	private String eventname;
+	
 	private String description;
-	private String event_location;
-	private String date_and_time;
+	
+	@Column(name = "event_location")
+	private String eventlocation;
+	
+	@Column(name = "date_and_time")
+	private String dateandtime;
+	
 	private int capacity;
-	private String phone_number;
+	
+	@Column(name = "phone_number")
+	private String phonenumber;
 
 	private File attachment;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "type_id")
 	private Type type;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "status_id")
 	private Status status;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "host_id")
-	private User host_id;
+	private User hostId;
 
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getEvent_id() {
-		return event_id;
+	public Event(int id, String eventname, String description, String eventlocation, String dateandtime, int capacity,
+			String phonenumber, File attachment, Type type, Status status, Genre genre, User hostId) {
+		super();
+		this.id = id;
+		this.eventname = eventname;
+		this.description = description;
+		this.eventlocation = eventlocation;
+		this.dateandtime = dateandtime;
+		this.capacity = capacity;
+		this.phonenumber = phonenumber;
+		this.attachment = attachment;
+		this.type = type;
+		this.status = status;
+		this.genre = genre;
+		this.hostId = hostId;
 	}
 
-	public void setEvent_id(int event_id) {
-		this.event_id = event_id;
+	@Override
+	public String toString() {
+		return "Event [id=" + id + ", eventname=" + eventname + ", description=" + description + ", eventlocation="
+				+ eventlocation + ", dateandtime=" + dateandtime + ", capacity=" + capacity + ", phonenumber="
+				+ phonenumber + ", attachment=" + attachment + ", type=" + type + ", status=" + status + ", genre="
+				+ genre + ", hostId=" + hostId + "]";
 	}
 
-	public String getEvent_name() {
-		return event_name;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((attachment == null) ? 0 : attachment.hashCode());
+		result = prime * result + capacity;
+		result = prime * result + ((dateandtime == null) ? 0 : dateandtime.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((eventlocation == null) ? 0 : eventlocation.hashCode());
+		result = prime * result + ((eventname == null) ? 0 : eventname.hashCode());
+		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
+		result = prime * result + ((hostId == null) ? 0 : hostId.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
 	}
 
-	public void setEvent_name(String event_name) {
-		this.event_name = event_name;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Event other = (Event) obj;
+		if (attachment == null) {
+			if (other.attachment != null)
+				return false;
+		} else if (!attachment.equals(other.attachment))
+			return false;
+		if (capacity != other.capacity)
+			return false;
+		if (dateandtime == null) {
+			if (other.dateandtime != null)
+				return false;
+		} else if (!dateandtime.equals(other.dateandtime))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (eventlocation == null) {
+			if (other.eventlocation != null)
+				return false;
+		} else if (!eventlocation.equals(other.eventlocation))
+			return false;
+		if (eventname == null) {
+			if (other.eventname != null)
+				return false;
+		} else if (!eventname.equals(other.eventname))
+			return false;
+		if (genre == null) {
+			if (other.genre != null)
+				return false;
+		} else if (!genre.equals(other.genre))
+			return false;
+		if (hostId == null) {
+			if (other.hostId != null)
+				return false;
+		} else if (!hostId.equals(other.hostId))
+			return false;
+		if (id != other.id)
+			return false;
+		if (phonenumber == null) {
+			if (other.phonenumber != null)
+				return false;
+		} else if (!phonenumber.equals(other.phonenumber))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getEventname() {
+		return eventname;
+	}
+
+	public void setEventname(String eventname) {
+		this.eventname = eventname;
 	}
 
 	public String getDescription() {
@@ -80,20 +198,20 @@ public class Event {
 		this.description = description;
 	}
 
-	public String getEvent_location() {
-		return event_location;
+	public String getEventlocation() {
+		return eventlocation;
 	}
 
-	public void setEvent_location(String event_location) {
-		this.event_location = event_location;
+	public void setEventlocation(String eventlocation) {
+		this.eventlocation = eventlocation;
 	}
 
-	public String getDate_and_time() {
-		return date_and_time;
+	public String getDateandtime() {
+		return dateandtime;
 	}
 
-	public void setDate_and_time(String date_and_time) {
-		this.date_and_time = date_and_time;
+	public void setDateandtime(String dateandtime) {
+		this.dateandtime = dateandtime;
 	}
 
 	public int getCapacity() {
@@ -104,12 +222,12 @@ public class Event {
 		this.capacity = capacity;
 	}
 
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 	public File getAttachment() {
@@ -144,122 +262,12 @@ public class Event {
 		this.genre = genre;
 	}
 
-	public User getHost_id() {
-		return host_id;
+	public User getHostId() {
+		return hostId;
 	}
 
-	public void setHost_id(User host_id) {
-		this.host_id = host_id;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((attachment == null) ? 0 : attachment.hashCode());
-		result = prime * result + capacity;
-		result = prime * result + ((date_and_time == null) ? 0 : date_and_time.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + event_id;
-		result = prime * result + ((event_location == null) ? 0 : event_location.hashCode());
-		result = prime * result + ((event_name == null) ? 0 : event_name.hashCode());
-		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
-		result = prime * result + ((host_id == null) ? 0 : host_id.hashCode());
-		result = prime * result + ((phone_number == null) ? 0 : phone_number.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Event other = (Event) obj;
-		if (attachment == null) {
-			if (other.attachment != null)
-				return false;
-		} else if (!attachment.equals(other.attachment))
-			return false;
-		if (capacity != other.capacity)
-			return false;
-		if (date_and_time == null) {
-			if (other.date_and_time != null)
-				return false;
-		} else if (!date_and_time.equals(other.date_and_time))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (event_id != other.event_id)
-			return false;
-		if (event_location == null) {
-			if (other.event_location != null)
-				return false;
-		} else if (!event_location.equals(other.event_location))
-			return false;
-		if (event_name == null) {
-			if (other.event_name != null)
-				return false;
-		} else if (!event_name.equals(other.event_name))
-			return false;
-		if (genre == null) {
-			if (other.genre != null)
-				return false;
-		} else if (!genre.equals(other.genre))
-			return false;
-		if (host_id == null) {
-			if (other.host_id != null)
-				return false;
-		} else if (!host_id.equals(other.host_id))
-			return false;
-		if (phone_number == null) {
-			if (other.phone_number != null)
-				return false;
-		} else if (!phone_number.equals(other.phone_number))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Event [event_id=" + event_id + ", event_name=" + event_name + ", description=" + description
-				+ ", event_location=" + event_location + ", date_and_time=" + date_and_time + ", capacity=" + capacity
-				+ ", phone_number=" + phone_number + ", attachment=" + attachment + ", type=" + type + ", status="
-				+ status + ", genre=" + genre + ", host_id=" + host_id + "]";
-	}
-
-	public Event(int event_id, String event_name, String description, String event_location, String date_and_time,
-			int capacity, String phone_number, File attachment, Type type, Status status, Genre genre, User host_id) {
-		super();
-		this.event_id = event_id;
-		this.event_name = event_name;
-		this.description = description;
-		this.event_location = event_location;
-		this.date_and_time = date_and_time;
-		this.capacity = capacity;
-		this.phone_number = phone_number;
-		this.attachment = attachment;
-		this.type = type;
-		this.status = status;
-		this.genre = genre;
-		this.host_id = host_id;
+	public void setHostId(User hostId) {
+		this.hostId = hostId;
 	}
 
 }

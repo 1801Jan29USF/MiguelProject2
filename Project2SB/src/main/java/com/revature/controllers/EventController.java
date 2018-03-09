@@ -23,14 +23,19 @@ public class EventController {
 		return es.save(e);
 	}
 
-	@PostMapping("events/q= {type}")
+	@PostMapping("events/q={type}")
 	public ArrayList<Event> findAllByType(@RequestBody String type) {
 		return es.findAllByType(type);
 	}
 
-	@PostMapping("events/q= {genre}")
+	@PostMapping("events/q={genre}")
 	public ArrayList<Event> findAllByGenre(@RequestBody String genre) {
 		return es.findAllByGenre(genre);
+	}
+
+	@PostMapping("events/q={id}")
+	public ArrayList<Event> findAllByUserId(@RequestBody int id) {
+		return es.findAllByHostId(id);
 	}
 
 }

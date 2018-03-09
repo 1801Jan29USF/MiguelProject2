@@ -21,7 +21,7 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public User findByUsername(User u) {
 		User userExists = rr.findByUsername(u.getUsername());
-		if (userExists != null) {
+		if (userExists == null) {
 			return rr.save(u);
 
 		}

@@ -1,12 +1,8 @@
 package com.revature.entities;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,30 +11,33 @@ public class Genre {
 
 	@Id
 	@Column(name = "genre_id")
-	private int genre_id;
+	private int id;
 
-	public int getGenre_id() {
-		return genre_id;
+	@Column(name = "genre_type")
+	private String genre;
+
+	public Genre() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setGenre_id(int genre_id) {
-		this.genre_id = genre_id;
+	public Genre(int id, String genre) {
+		super();
+		this.id = id;
+		this.genre = genre;
 	}
 
-	public String getGenre_type() {
-		return genre_type;
-	}
-
-	public void setGenre_type(String genre_type) {
-		this.genre_type = genre_type;
+	@Override
+	public String toString() {
+		return "Genre [id=" + id + ", genre=" + genre + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + genre_id;
-		result = prime * result + ((genre_type == null) ? 0 : genre_type.hashCode());
+		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 
@@ -51,32 +50,30 @@ public class Genre {
 		if (getClass() != obj.getClass())
 			return false;
 		Genre other = (Genre) obj;
-		if (genre_id != other.genre_id)
-			return false;
-		if (genre_type == null) {
-			if (other.genre_type != null)
+		if (genre == null) {
+			if (other.genre != null)
 				return false;
-		} else if (!genre_type.equals(other.genre_type))
+		} else if (!genre.equals(other.genre))
+			return false;
+		if (id != other.id)
 			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Genre [genre_id=" + genre_id + ", genre_type=" + genre_type + "]";
+	public int getId() {
+		return id;
 	}
 
-	public Genre(int genre_id, String genre_type) {
-		super();
-		this.genre_id = genre_id;
-		this.genre_type = genre_type;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public Genre() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getGenre() {
+		return genre;
 	}
 
-	private String genre_type;
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 
 }

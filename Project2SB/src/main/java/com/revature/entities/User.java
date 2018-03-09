@@ -21,9 +21,9 @@ public class User {
 	@Column(name = "user_id")
 	@SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
 	@GeneratedValue(generator = "user_id_seq", strategy = GenerationType.AUTO)
-	private int user_id;
+	private int id;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "role_id")
 	private Role role;
 
@@ -31,39 +31,49 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	private String first_name;
-	private String last_name;
+	@Column(name = "first_name")
+	private String firstname;
+	
+	@Column(name = "last_name")
+	private String lastname;
+	
 	private String username;
-	private String user_password;
+	
+	@Column(name = "user_password")
+	private String password;
+	
 	private String bio;
+	
 	private String email;
-	private String phone_number;
+	
+	@Column(name = "phone_number")
+	private String phonenumber;
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int user_id, Role role, Address address, String first_name, String last_name, String username,
-			String user_password, String bio, String email, String phone_number) {
+	public User(int id, Role role, Address address, String firstname, String lastname, String username, String password,
+			String bio, String email, String phonenumber) {
 		super();
-		this.user_id = user_id;
+		this.id = id;
 		this.role = role;
 		this.address = address;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.username = username;
-		this.user_password = user_password;
+		this.password = password;
 		this.bio = bio;
 		this.email = email;
-		this.phone_number = phone_number;
+		this.phonenumber = phonenumber;
 	}
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", role=" + role + ", address=" + address + ", first_name=" + first_name
-				+ ", last_name=" + last_name + ", username=" + username + ", user_password=" + user_password + ", bio="
-				+ bio + ", email=" + email + ", phone_number=" + phone_number + "]";
+		return "User [id=" + id + ", role=" + role + ", address=" + address + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", username=" + username + ", password=" + password + ", bio=" + bio + ", email=" + email
+				+ ", phonenumber=" + phonenumber + "]";
 	}
 
 	@Override
@@ -73,12 +83,12 @@ public class User {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((bio == null) ? 0 : bio.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((first_name == null) ? 0 : first_name.hashCode());
-		result = prime * result + ((last_name == null) ? 0 : last_name.hashCode());
-		result = prime * result + ((phone_number == null) ? 0 : phone_number.hashCode());
+		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + user_id;
-		result = prime * result + ((user_password == null) ? 0 : user_password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -107,32 +117,32 @@ public class User {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (first_name == null) {
-			if (other.first_name != null)
+		if (firstname == null) {
+			if (other.firstname != null)
 				return false;
-		} else if (!first_name.equals(other.first_name))
+		} else if (!firstname.equals(other.firstname))
 			return false;
-		if (last_name == null) {
-			if (other.last_name != null)
-				return false;
-		} else if (!last_name.equals(other.last_name))
+		if (id != other.id)
 			return false;
-		if (phone_number == null) {
-			if (other.phone_number != null)
+		if (lastname == null) {
+			if (other.lastname != null)
 				return false;
-		} else if (!phone_number.equals(other.phone_number))
+		} else if (!lastname.equals(other.lastname))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phonenumber == null) {
+			if (other.phonenumber != null)
+				return false;
+		} else if (!phonenumber.equals(other.phonenumber))
 			return false;
 		if (role == null) {
 			if (other.role != null)
 				return false;
 		} else if (!role.equals(other.role))
-			return false;
-		if (user_id != other.user_id)
-			return false;
-		if (user_password == null) {
-			if (other.user_password != null)
-				return false;
-		} else if (!user_password.equals(other.user_password))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -142,12 +152,12 @@ public class User {
 		return true;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Role getRole() {
@@ -166,20 +176,20 @@ public class User {
 		this.address = address;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getUsername() {
@@ -190,12 +200,12 @@ public class User {
 		this.username = username;
 	}
 
-	public String getUser_password() {
-		return user_password;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUser_password(String user_password) {
-		this.user_password = user_password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getBio() {
@@ -214,12 +224,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 }

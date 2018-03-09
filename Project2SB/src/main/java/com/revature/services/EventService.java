@@ -12,7 +12,6 @@ public interface EventService {
 
 	ArrayList<Event> findAllByGenre(String genre);
 
-	ArrayList<Event> findAllById(int user_id);
-	
+	ArrayList<Event> findAllByHostId(int id);
 
 }
