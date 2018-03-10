@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.Event;
+import com.revature.entities.Genre;
+import com.revature.entities.Type;
 import com.revature.repos.EventRepo;
 
 @Service
@@ -20,19 +22,25 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public ArrayList<Event> findAllByType(String type) {
+	public ArrayList<Event> findAllByType(Type type) {
 		return er.findAllByType(type);
 	}
 
 	@Override
-	public ArrayList<Event> findAllByGenre(String genre) {
+	public ArrayList<Event> findAllByGenre(Genre genre) {
 		return er.findAllByGenre(genre);
 	}
 
 	@Override
-	public ArrayList<Event> findAllByHostId(int id) {
+	public ArrayList<Event> findAllByCity(String city) {
 
-		return er.findAllByHostId(id);
+		return er.findAllByCity(city);
+	}
+
+	@Override
+	public ArrayList<Event> findAllByHostId(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

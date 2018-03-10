@@ -34,6 +34,7 @@ public class UserController {
 		return es.findAllByHostId(u.getId());
 	}
 
+	// TODO
 	@PostMapping("/updateprofile")
 	public User save(@RequestBody User u) {
 		return us.save(u);
