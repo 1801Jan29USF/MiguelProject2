@@ -2,7 +2,6 @@ package com.revature.entities;
 
 import java.io.File;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,23 +20,23 @@ public class Event {
 
 	@Id
 	@Column(name = "event_id")
-	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq")
+	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq", allocationSize = 1)
 	@GeneratedValue(generator = "event_id_seq", strategy = GenerationType.AUTO)
 	private int id;
 
 	@Column(name = "event_name")
 	private String eventname;
-	
+
 	private String description;
-	
+
 	@Column(name = "event_location")
 	private String eventlocation;
-	
+
 	@Column(name = "date_and_time")
 	private String dateandtime;
-	
+
 	private int capacity;
-	
+
 	@Column(name = "phone_number")
 	private String phonenumber;
 
@@ -55,9 +54,17 @@ public class Event {
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "host_id")
-	private User hostId;
+	private User host;
+
+	@Override
+	public String toString() {
+		return "Event [id=" + id + ", eventname=" + eventname + ", description=" + description + ", eventlocation="
+				+ eventlocation + ", dateandtime=" + dateandtime + ", capacity=" + capacity + ", phonenumber="
+				+ phonenumber + ", attachment=" + attachment + ", type=" + type + ", status=" + status + ", genre="
+				+ genre + ", host=" + host + "]";
+	}
 
 	public Event() {
 		super();
@@ -65,7 +72,7 @@ public class Event {
 	}
 
 	public Event(int id, String eventname, String description, String eventlocation, String dateandtime, int capacity,
-			String phonenumber, File attachment, Type type, Status status, Genre genre, User hostId) {
+			String phonenumber, File attachment, Type type, Status status, Genre genre, User host) {
 		super();
 		this.id = id;
 		this.eventname = eventname;
@@ -78,15 +85,7 @@ public class Event {
 		this.type = type;
 		this.status = status;
 		this.genre = genre;
-		this.hostId = hostId;
-	}
-
-	@Override
-	public String toString() {
-		return "Event [id=" + id + ", eventname=" + eventname + ", description=" + description + ", eventlocation="
-				+ eventlocation + ", dateandtime=" + dateandtime + ", capacity=" + capacity + ", phonenumber="
-				+ phonenumber + ", attachment=" + attachment + ", type=" + type + ", status=" + status + ", genre="
-				+ genre + ", hostId=" + hostId + "]";
+		this.host = host;
 	}
 
 	@Override
@@ -100,7 +99,7 @@ public class Event {
 		result = prime * result + ((eventlocation == null) ? 0 : eventlocation.hashCode());
 		result = prime * result + ((eventname == null) ? 0 : eventname.hashCode());
 		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
-		result = prime * result + ((hostId == null) ? 0 : hostId.hashCode());
+		result = prime * result + ((host == null) ? 0 : host.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -149,10 +148,10 @@ public class Event {
 				return false;
 		} else if (!genre.equals(other.genre))
 			return false;
-		if (hostId == null) {
-			if (other.hostId != null)
+		if (host == null) {
+			if (other.host != null)
 				return false;
-		} else if (!hostId.equals(other.hostId))
+		} else if (!host.equals(other.host))
 			return false;
 		if (id != other.id)
 			return false;
@@ -262,12 +261,12 @@ public class Event {
 		this.genre = genre;
 	}
 
-	public User getHostId() {
-		return hostId;
+	public User getHost() {
+		return host;
 	}
 
-	public void setHostId(User hostId) {
-		this.hostId = hostId;
+	public void setHost(User host) {
+		this.host = host;
 	}
 
 }

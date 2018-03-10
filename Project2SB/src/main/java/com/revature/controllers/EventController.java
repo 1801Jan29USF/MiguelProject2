@@ -18,10 +18,6 @@ public class EventController {
 	@Autowired
 	private EventService es;
 
-	@PostMapping
-	public Event createEvent(@RequestBody Event e) {
-		return es.save(e);
-	}
 
 	@PostMapping("events/q={type}")
 	public ArrayList<Event> findAllByType(@RequestBody String type) {

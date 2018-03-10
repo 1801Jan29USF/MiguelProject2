@@ -165,47 +165,6 @@ CREATE SEQUENCE event_id_seq START WITH 1;
 
 CREATE SEQUENCE address_id_seq START WITH 1;
 
-/*******************************************************************************
-   Triggers
-********************************************************************************/
-
---CREATE OR REPLACE TRIGGER user_id_trigger
---BEFORE INSERT OR UPDATE on users
---FOR EACH ROW
---BEGIN
---    IF INSERTING THEN
---        SELECT user_id_seq.nextVal INTO :new.user_id FROM dual;
---    ELSIF UPDATING THEN
---        SELECT :old.user_id INTO :new.user_id FROM dual;
---    END IF;
---END;
---/
---
---CREATE OR REPLACE TRIGGER address_id_trigger
---BEFORE INSERT OR UPDATE on address
---FOR EACH ROW
---BEGIN
---    IF INSERTING THEN
---        SELECT address_id_seq.nextVal INTO :new.address_id FROM dual;
---    ELSIF UPDATING THEN
---        SELECT :old.address_id INTO :new.address_id FROM dual;
---    END IF;
---END;
---/
---
---
---
---CREATE OR REPLACE TRIGGER event_id_trigger
---BEFORE INSERT OR UPDATE on event
---FOR EACH ROW
---BEGIN
---    IF INSERTING THEN
---        SELECT event_id_seq.nextVal INTO :new.event_id FROM dual;
---    ELSIF UPDATING THEN
---        SELECT :old.event_id INTO :new.event_id FROM dual;
---    END IF;
---END;
---/
 
 commit;
 exit;

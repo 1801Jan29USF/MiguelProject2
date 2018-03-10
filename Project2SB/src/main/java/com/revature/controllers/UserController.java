@@ -23,6 +23,12 @@ public class UserController {
 	@Autowired
 	private UserService us;
 
+	@PostMapping("/createEvent")
+	public void createEvent(@RequestBody Event e) {
+		es.save(e);
+		return;
+	}
+
 	@PostMapping("/pastevents")
 	public ArrayList<Event> findAll(@RequestBody User u) {
 		return es.findAllByHostId(u.getId());
