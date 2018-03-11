@@ -29,8 +29,10 @@ public class Event {
 
 	private String description;
 
-	@Column(name = "event_location")
-	private String eventlocation;
+	@Column(name = "location_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "address")
+	private User location;
 
 	@Column(name = "date_and_time")
 	private String dateandtime;
@@ -58,26 +60,18 @@ public class Event {
 	@JoinColumn(name = "host_id")
 	private User host;
 
-	@Override
-	public String toString() {
-		return "Event [id=" + id + ", eventname=" + eventname + ", description=" + description + ", eventlocation="
-				+ eventlocation + ", dateandtime=" + dateandtime + ", capacity=" + capacity + ", phonenumber="
-				+ phonenumber + ", attachment=" + attachment + ", type=" + type + ", status=" + status + ", genre="
-				+ genre + ", host=" + host + "]";
-	}
-
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Event(int id, String eventname, String description, String eventlocation, String dateandtime, int capacity,
+	public Event(int id, String eventname, String description, User location, String dateandtime, int capacity,
 			String phonenumber, File attachment, Type type, Status status, Genre genre, User host) {
 		super();
 		this.id = id;
 		this.eventname = eventname;
 		this.description = description;
-		this.eventlocation = eventlocation;
+		this.location = location;
 		this.dateandtime = dateandtime;
 		this.capacity = capacity;
 		this.phonenumber = phonenumber;
@@ -89,6 +83,14 @@ public class Event {
 	}
 
 	@Override
+	public String toString() {
+		return "Event [id=" + id + ", eventname=" + eventname + ", description=" + description + ", location="
+				+ location + ", dateandtime=" + dateandtime + ", capacity=" + capacity + ", phonenumber=" + phonenumber
+				+ ", attachment=" + attachment + ", type=" + type + ", status=" + status + ", genre=" + genre
+				+ ", host=" + host + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -96,11 +98,11 @@ public class Event {
 		result = prime * result + capacity;
 		result = prime * result + ((dateandtime == null) ? 0 : dateandtime.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((eventlocation == null) ? 0 : eventlocation.hashCode());
 		result = prime * result + ((eventname == null) ? 0 : eventname.hashCode());
 		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
 		result = prime * result + ((host == null) ? 0 : host.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -133,11 +135,6 @@ public class Event {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (eventlocation == null) {
-			if (other.eventlocation != null)
-				return false;
-		} else if (!eventlocation.equals(other.eventlocation))
-			return false;
 		if (eventname == null) {
 			if (other.eventname != null)
 				return false;
@@ -154,6 +151,11 @@ public class Event {
 		} else if (!host.equals(other.host))
 			return false;
 		if (id != other.id)
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
 			return false;
 		if (phonenumber == null) {
 			if (other.phonenumber != null)
@@ -197,12 +199,12 @@ public class Event {
 		this.description = description;
 	}
 
-	public String getEventlocation() {
-		return eventlocation;
+	public User getLocation() {
+		return location;
 	}
 
-	public void setEventlocation(String eventlocation) {
-		this.eventlocation = eventlocation;
+	public void setLocation(User location) {
+		this.location = location;
 	}
 
 	public String getDateandtime() {
