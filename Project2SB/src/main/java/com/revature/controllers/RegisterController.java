@@ -17,8 +17,8 @@ public class RegisterController {
 	private RegisterService rs;
 
 	@PostMapping
-	public User createUser(@RequestBody User u) {
+	public String register(@RequestBody User u) {
 
-		return rs.findByUsername(u);
+		return rs.register(u);
 	}
 }

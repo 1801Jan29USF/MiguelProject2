@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,18 @@ public class EventServiceImpl implements EventService {
 
 	}
 
+	@Override
+	public String createEvent(Event e) {
+
+		List<Event> events = er.findAllByLocation(e.getLocation());
+
+		for (Event event : events) {
+			if (event.getdateandtime().equals(e.getdateandtime())
+					&& event.getLocation().getId() == e.getLocation().getId()) {
+				return "Event at given date and time already exists";
+			}
+		}
+		er.save(e);
+		return "Event successfully created";
+	}
 }

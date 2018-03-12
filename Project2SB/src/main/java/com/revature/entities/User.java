@@ -33,19 +33,19 @@ public class User {
 
 	@Column(name = "first_name")
 	private String firstname;
-	
+
 	@Column(name = "last_name")
 	private String lastname;
-	
+
 	private String username;
-	
+
 	@Column(name = "user_password")
 	private String password;
-	
+
 	private String bio;
-	
+
 	private String email;
-	
+
 	@Column(name = "phone_number")
 	private String phonenumber;
 

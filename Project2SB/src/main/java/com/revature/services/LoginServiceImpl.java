@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.dto.LoginDTO;
+import com.revature.dto.DTO;
 import com.revature.entities.User;
 import com.revature.repos.LoginRepo;
 
@@ -23,10 +23,10 @@ public class LoginServiceImpl implements LoginService {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		LoginDTO cred = new LoginDTO();
+		DTO cred = new DTO();
 
 		try {
-			cred = mapper.readValue(credential, LoginDTO.class);
+			cred = mapper.readValue(credential, DTO.class);
 		} catch (JsonParseException e) {
 
 			e.printStackTrace();

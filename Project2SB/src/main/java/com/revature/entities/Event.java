@@ -29,10 +29,9 @@ public class Event {
 
 	private String description;
 
-	@Column(name = "location_id")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address")
-	private User location;
+	@JoinColumn(name = "location_id")
+	private Address location;
 
 	@Column(name = "date_and_time")
 	private String dateandtime;
@@ -65,7 +64,7 @@ public class Event {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Event(int id, String eventname, String description, User location, String dateandtime, int capacity,
+	public Event(int id, String eventname, String description, Address location, String dateandtime, int capacity,
 			String phonenumber, File attachment, Type type, Status status, Genre genre, User host) {
 		super();
 		this.id = id;
@@ -199,19 +198,19 @@ public class Event {
 		this.description = description;
 	}
 
-	public User getLocation() {
+	public Address getLocation() {
 		return location;
 	}
 
-	public void setLocation(User location) {
+	public void setLocation(Address location) {
 		this.location = location;
 	}
 
-	public String getDateandtime() {
+	public String getdateandtime() {
 		return dateandtime;
 	}
 
-	public void setDateandtime(String dateandtime) {
+	public void setdateandtime(String dateandtime) {
 		this.dateandtime = dateandtime;
 	}
 

@@ -14,4 +14,9 @@ public interface UserService {
 
 	ArrayList<Event> findAllByAddress(Address loc);
 
+	User findByUsername(String username);
+
+	ArrayList<Event> findAll(String username);
+
+
 }

@@ -3,12 +3,14 @@ package com.revature.controllers;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.dto.DTO;
 import com.revature.entities.Address;
 import com.revature.entities.Event;
 import com.revature.entities.User;
@@ -26,15 +28,27 @@ public class UserController {
 	private UserService us;
 
 	@PostMapping("/createEvent")
-	public void createEvent(@RequestBody Event e) {
-		es.save(e);
-		return;
+	public String createEvent(@RequestBody Event e) {
+		return es.createEvent(e);
 	}
 
 	// only events that a user has hosted
-	@PostMapping("/myevents/{username}")
+	@GetMapping("/hostedevents/{username}")
 	public ArrayList<Event> findAll(@PathVariable String username) {
 		return es.findAllByHostId(username);
+	}
+
+	// events that a user has hosted at his/her house
+	// and events that other's have hosted at user's house
+	@GetMapping("/myHouse")
+	public ArrayList<Event> pendingEvents(@RequestBody Address loc) {
+		return us.findAllByAddress(loc);
+	}
+
+	// all events that a user has attended
+	@GetMapping("/AttendedEvents/{username}")
+	public ArrayList<Event> attendedEvents(@PathVariable String username) {
+		return us.findAll(username);
 	}
 
 	@PostMapping("/updateprofile/{username}")
@@ -44,11 +58,9 @@ public class UserController {
 		return us.save(u);
 	}
 
-	// events that a user has hosted at his/her house
-	// and events that other's have hosted at user's house
-	@PostMapping("/pendingevents")
-	public ArrayList<Event> pendingEvents(@RequestBody Address loc) {
-		return us.findAllByAddress(loc);
+	@GetMapping(value = { "/profile", "/createEvent" })
+	public User getProfileInfo(@RequestBody DTO credentials) {
+		return us.findByUsername(credentials.username);
 	}
 
 }

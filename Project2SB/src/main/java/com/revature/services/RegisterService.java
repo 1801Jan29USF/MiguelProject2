@@ -6,6 +6,6 @@ public interface RegisterService {
 
 	User save(User u);
 
-	User findByUsername(User u);
+	String register(User u);
 
 }

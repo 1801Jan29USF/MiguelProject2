@@ -44,6 +44,25 @@ CREATE TABLE users
     constraint user_pk primary key (user_id)
 );
 
+/*******************************************************************************
+   Users/Event Table
+********************************************************************************/
+CREATE TABLE users_event (
+    user_id number,
+    event_id number
+);
+
+/*******************************************************************************
+   Users/Event Foreign Keys
+********************************************************************************/
+
+alter table users_event add constraint users_id_fk
+foreign key (user_id) REFERENCES users (user_id); 
+
+alter table users_event add constraint event_id_fk
+foreign key (event_id) REFERENCES event (event_id); 
+
+
 
 /*******************************************************************************
    Address Table
@@ -101,10 +120,13 @@ genre_id number
 );
 
 /*******************************************************************************
-  Event Table
+  Event Table Constraints
 ********************************************************************************/
 alter table event add constraint host_id_fk
 foreign key (host_id) REFERENCES users (user_id);
+
+alter table event add constraint location_id_fk
+foreign key (location_id) REFERENCES address (address_id);
 
 /*******************************************************************************
   Status Table

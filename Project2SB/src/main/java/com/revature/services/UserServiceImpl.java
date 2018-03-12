@@ -32,4 +32,21 @@ public class UserServiceImpl implements UserService {
 		return findAllByAddress(loc);
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		return ur.findByUsername(username);
+	}
+
+	@Override
+	public ArrayList<Event> findAll(String username) {
+		int id = ur.findByUsername(username).getId();
+		
+		
+		
+		
+		
+		
+		return null;
+	}
+
 }
