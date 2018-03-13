@@ -12,15 +12,14 @@ import com.revature.services.RegisterService;
 
 @RestController
 @RequestMapping("register")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class RegisterController {
 
 	@Autowired
 	private RegisterService rs;
 
 	@PostMapping
-	public String register(@RequestBody User u) {
-
+	public User register(@RequestBody User u) {
 		return rs.register(u);
 	}
 }

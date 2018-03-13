@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import com.revature.entities.User;
 import com.revature.repos.RegisterRepo;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-
 @Service
 public class RegisterServiceImpl implements RegisterService {
 
@@ -15,26 +13,16 @@ public class RegisterServiceImpl implements RegisterService {
 	private RegisterRepo rr;
 
 	@Override
-	public User save(User u) {
-		return rr.save(u);
-
-	}
-
-	@Override
-	public String register(User u) {
-
-		if (rr.findByEmail(u.getEmail()) != null && rr.findByUsername(u.getUsername()) != null) {
-			return "Email and Username already exist";
-		}
+	public User register(User u) {
 		if (rr.findByEmail(u.getEmail()) != null) {
-			return "Email already exists";
+			return null;
 		}
 		if (rr.findByUsername(u.getUsername()) != null) {
-			return "Username already exists";
+			return null;
 		}
-		
+
 		rr.save(u);
-		return "Success";
+		return u;
 	}
 
 }

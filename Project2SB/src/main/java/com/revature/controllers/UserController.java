@@ -1,7 +1,7 @@
 package com.revature.controllers;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +21,7 @@ import com.revature.services.UserService;
 
 @RestController
 @RequestMapping("user")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
 	@Autowired
@@ -50,7 +50,7 @@ public class UserController {
 
 	// all events that a user has attended
 	@GetMapping("/AttendedEvents/{username}")
-	public List<Event> attendedEvents(@PathVariable String username) {
+	public Set<Event> attendedEvents(@PathVariable String username) {
 		return us.findAll(username);
 	}
 
