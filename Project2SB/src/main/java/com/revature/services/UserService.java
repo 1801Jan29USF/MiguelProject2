@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.entities.Address;
 import com.revature.entities.Event;
@@ -16,7 +17,7 @@ public interface UserService {
 
 	User findByUsername(String username);
 
-	ArrayList<Event> findAll(String username);
+	List<Event> findAll(String username);
 
 
 }

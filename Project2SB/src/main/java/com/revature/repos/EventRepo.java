@@ -19,4 +19,6 @@ public interface EventRepo extends JpaRepository<Event, Integer> {
 
 	ArrayList<Event> findAllByLocation(Address location);
 
+	Event findById(int eventid);
+
 }

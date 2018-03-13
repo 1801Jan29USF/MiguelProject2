@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,32 +34,32 @@ public class UserController {
 	}
 
 	// only events that a user has hosted
-	@GetMapping("/hostedevents/{username}")
+	@GetMapping("/HostedEvents/{username}")
 	public ArrayList<Event> findAll(@PathVariable String username) {
 		return es.findAllByHostId(username);
 	}
 
 	// events that a user has hosted at his/her house
 	// and events that other's have hosted at user's house
-	@GetMapping("/myHouse")
+	@GetMapping("/MyHouse")
 	public ArrayList<Event> pendingEvents(@RequestBody Address loc) {
 		return us.findAllByAddress(loc);
 	}
 
 	// all events that a user has attended
 	@GetMapping("/AttendedEvents/{username}")
-	public ArrayList<Event> attendedEvents(@PathVariable String username) {
+	public List<Event> attendedEvents(@PathVariable String username) {
 		return us.findAll(username);
 	}
 
-	@PostMapping("/updateprofile/{username}")
+	@PostMapping("/UpdateProfile/{username}")
 	public User updateProfile(@RequestBody User u, @PathVariable String username) {
 
 		u.setId(us.updateProfile(username));
 		return us.save(u);
 	}
 
-	@GetMapping(value = { "/profile", "/createEvent" })
+	@GetMapping(value = { "/Profile", "/CreateEvent" })
 	public User getProfileInfo(@RequestBody DTO credentials) {
 		return us.findByUsername(credentials.username);
 	}
