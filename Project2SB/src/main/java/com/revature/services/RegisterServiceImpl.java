@@ -13,19 +13,16 @@ public class RegisterServiceImpl implements RegisterService {
 	private RegisterRepo rr;
 
 	@Override
-	public User save(User u) {
-		return rr.save(u);
-
-	}
-
-	@Override
-	public User findByUsername(User u) {
-		User userExists = rr.findByUsername(u.getUsername());
-		if (userExists == null) {
-			return rr.save(u);
-
+	public User register(User u) {
+		if (rr.findByEmail(u.getEmail()) != null) {
+			return null;
 		}
-		return null;
+		if (rr.findByUsername(u.getUsername()) != null) {
+			return null;
+		}
+
+		rr.save(u);
+		return u;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.revature.entities;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -33,21 +37,25 @@ public class User {
 
 	@Column(name = "first_name")
 	private String firstname;
-	
+
 	@Column(name = "last_name")
 	private String lastname;
-	
+
 	private String username;
-	
+
 	@Column(name = "user_password")
 	private String password;
-	
+
 	private String bio;
-	
+
 	private String email;
-	
+
 	@Column(name = "phone_number")
 	private String phonenumber;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "users_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+	private Set<Event> userevents;
 
 	public User() {
 		super();
@@ -67,13 +75,14 @@ public class User {
 		this.bio = bio;
 		this.email = email;
 		this.phonenumber = phonenumber;
+
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", role=" + role + ", address=" + address + ", firstname=" + firstname + ", lastname="
 				+ lastname + ", username=" + username + ", password=" + password + ", bio=" + bio + ", email=" + email
-				+ ", phonenumber=" + phonenumber + "]";
+				+ ", phonenumber=" + phonenumber + ", userevents=" + userevents + "]";
 	}
 
 	@Override
@@ -89,6 +98,7 @@ public class User {
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((userevents == null) ? 0 : userevents.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -143,6 +153,11 @@ public class User {
 			if (other.role != null)
 				return false;
 		} else if (!role.equals(other.role))
+			return false;
+		if (userevents == null) {
+			if (other.userevents != null)
+				return false;
+		} else if (!userevents.equals(other.userevents))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -230,6 +245,14 @@ public class User {
 
 	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
+	}
+
+	public Set<Event> getUserevents() {
+		return userevents;
+	}
+
+	public void setUserevents(Set<Event> userevents) {
+		this.userevents = userevents;
 	}
 
 }

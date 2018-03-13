@@ -1,8 +1,10 @@
 package com.revature.services;
 
+import com.revature.dto.DTO;
 import com.revature.entities.User;
 
 public interface LoginService {
 	
-	User findByUsername(String username);
+
+	User findByCredentials(DTO credential);
 }

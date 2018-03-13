@@ -44,6 +44,25 @@ CREATE TABLE users
     constraint user_pk primary key (user_id)
 );
 
+/*******************************************************************************
+   Users/Event Table
+********************************************************************************/
+CREATE TABLE users_event (
+    user_id number,
+    event_id number
+);
+
+/*******************************************************************************
+   Users/Event Foreign Keys
+********************************************************************************/
+
+alter table users_event add constraint users_id_fk
+foreign key (user_id) REFERENCES users (user_id); 
+
+alter table users_event add constraint event_id_fk
+foreign key (event_id) REFERENCES event (event_id); 
+
+
 
 /*******************************************************************************
    Address Table
@@ -84,13 +103,14 @@ foreign key (role_id) REFERENCES user_role (user_role_id);
 /*******************************************************************************
   Event Table
 ********************************************************************************/
+
 create table event(
 event_id number primary key not null,
 host_id number not null,
 event_name varchar2(200)  not null,
 description varchar2(200) not null, 
-event_location varchar2(200) not null,
-date_and_time varchar2(50) unique not null,
+location_id number,
+date_and_time varchar2(50) not null,
 capacity number,
 phone_number number not null, 
 attachment blob,
@@ -100,10 +120,13 @@ genre_id number
 );
 
 /*******************************************************************************
-  Event Table
+  Event Table Constraints
 ********************************************************************************/
 alter table event add constraint host_id_fk
 foreign key (host_id) REFERENCES users (user_id);
+
+alter table event add constraint location_id_fk
+foreign key (location_id) REFERENCES address (address_id);
 
 /*******************************************************************************
   Status Table

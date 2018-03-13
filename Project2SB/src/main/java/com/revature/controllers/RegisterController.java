@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,14 +12,14 @@ import com.revature.services.RegisterService;
 
 @RestController
 @RequestMapping("register")
+@CrossOrigin(origins = "http://localhost:4200")
 public class RegisterController {
 
 	@Autowired
 	private RegisterService rs;
 
 	@PostMapping
-	public User createUser(@RequestBody User u) {
-
-		return rs.findByUsername(u);
+	public User register(@RequestBody User u) {
+		return rs.register(u);
 	}
 }

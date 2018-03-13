@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../../beans/user';
 
 
 @Component({
@@ -11,21 +13,47 @@ import { Router } from '@angular/router';
 export class Project2registerComponent implements OnInit {
 
   newUser = {
-    role: 0,
     firstname: '',
     lastname: '',
     username: '',
     password: '',
     email: '',
-    description: '',
+    bio: '',
     phonenumber: '',
-
+    role: {
+      id: 2
+    },
+    address: {
+      id: 0,
+      street: '',
+      city: '',
+      state: '',
+      zipcode: ''
+    }
   };
 
 
-  constructor() { }
+  constructor(private client: HttpClient, private router: Router, private user: User) { }
 
   ngOnInit() {
   }
 
+register() {
+  console.log(this.newUser);
+  this.client.post('http://localhost:8000/register', this.newUser) // {withCredentials: true})
+  .subscribe(
+    data => {
+      this.user = <User>data;
+      alert(this.newUser.username + ' registered! ');
+      if (this.user.role === 1) {
+        this.router.navigateByUrl('/dashboard');
+      } else if (this.user.role === 2) {
+        this.router.navigateByUrl('/dashboard');
+      }
+    },
+    err => {
+      alert('failed to register');
+    }
+  );
+}
 }

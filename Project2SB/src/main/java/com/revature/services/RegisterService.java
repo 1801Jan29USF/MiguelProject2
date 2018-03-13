@@ -4,8 +4,6 @@ import com.revature.entities.User;
 
 public interface RegisterService {
 
-	User save(User u);
-
-	User findByUsername(User u);
+	User register(User u);
 
 }

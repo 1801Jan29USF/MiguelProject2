@@ -1,21 +1,21 @@
 <div class="register">
 	<h1>Register</h1>
-    <form method="post">
-    	<input type="text" name="first" placeholder="First Name" required="required" />
-      <input type="text" name="last" placeholder="Last Name" required="required" />
-      <input type="text" name="u" placeholder="Username" required="required" />
-      <input type="password" name="p" placeholder="Password" required="required" />
+    <form (ngSubmit)="register()">
+    	<input type="text" name="first" placeholder="First Name" [(ngModel)]="newUser.firstname" required="required" />
+      <input type="text" name="last" placeholder="Last Name" [(ngModel)]="newUser.lastname"required="required" />
+      <input type="text" name="u" placeholder="Username" [(ngModel)]="newUser.username"required="required" />
+      <input type="password" name="p" placeholder="Password" [(ngModel)]="newUser.password" required="required" />
 
 
-      <input type="text" name="a" placeholder="Address" required="required" />
-      <input type="text" name="c" placeholder="City" required="required" />
-      <input type="text" name="s" placeholder="State" required="required" />
-      <input type="text" name="z" placeholder="Zipcode" required="required" />
+      <input type="text" name="a" [(ngModel)]="newUser.address.street" placeholder="Street" required="required" />
+      <input type="text" name="c" [(ngModel)]="newUser.address.city" placeholder="City" required="required" />
+      <input type="text" name="s" [(ngModel)]="newUser.address.state" placeholder="State" required="required" />
+      <input type="text" name="z" [(ngModel)]="newUser.address.zipcode" placeholder="Zipcode" required="required" />
 
 
-      <input type="text" name="b" placeholder="Self-Description" required="required" />
-      <input type="text" name="e" placeholder="Email" required="required" />
-        <input type="text" name="ph" placeholder="PhoneNumber" required="required" />
+      <input type="text" name="b" placeholder="Self-Description" [(ngModel)]="newUser.bio" required="required" />
+      <input type="text" name="e" placeholder="Email" [(ngModel)]="newUser.email" required="required" />
+        <input type="text" name="ph" placeholder="PhoneNumber" [(ngModel)]="newUser.phonenumber" required="required" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Sign Up </button>
     </form>
 </div>

@@ -1,9 +1,11 @@
 export class User {
     username: string;
-    userrole: number;
+    role: number;
     id: Number;
-   firstname: string;
-   lastname: string;
+    firstname: string;
+    lastname: string;
     email: string;
+    bio: string;
+    phonenumber: string;
 }
 
