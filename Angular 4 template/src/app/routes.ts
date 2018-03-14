@@ -7,6 +7,7 @@ import { PasteventsComponent } from './Project2/pastevents/pastevents.component'
 import { SearcheventComponent } from './Project2/searchevent/searchevent.component';
 import { Project2registerComponent } from './Project2/project2register/project2register.component';
 import { Project2loginComponent } from './Project2/project2login/project2login.component';
+import { HostGuard } from './guard/host.guard';
 
 export const appRoutes: Routes = [
   {

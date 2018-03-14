@@ -15,7 +15,7 @@ export class HostGuard implements CanActivate {
       return true;
     } else {
       this.Cookie.get('host');
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/pastevents');
     }
   }
 }

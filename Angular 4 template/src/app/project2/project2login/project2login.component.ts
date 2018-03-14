@@ -17,7 +17,7 @@ export class Project2loginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private client: HttpClient, private router: Router, private user: User) { }
+  constructor(private client: HttpClient, private router: Router, private user: User, private cookie: CookieService) { }
 
   ngOnInit() {
   }
@@ -27,12 +27,10 @@ export class Project2loginComponent implements OnInit {
       .subscribe(
         data => {
           this.user = <User>data;
+
+          this.cookie.set('username', this.credential.username);
           alert(this.credential.username + ' logged in');
-          if (this.user.role === 1) {
-            this.router.navigateByUrl('/dashboard');
-          } else if (this.user.role === 2) {
-            this.router.navigateByUrl('/dashboard');
-          }
+            this.router.navigateByUrl('/pastevents');
         },
         err => {
           alert('failed to log in');

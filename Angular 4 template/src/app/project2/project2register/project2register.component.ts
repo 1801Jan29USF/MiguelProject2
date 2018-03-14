@@ -45,11 +45,8 @@ register() {
     data => {
       this.user = <User>data;
       alert(this.newUser.username + ' registered! ');
-      if (this.user.role === 1) {
-        this.router.navigateByUrl('/dashboard');
-      } else if (this.user.role === 2) {
-        this.router.navigateByUrl('/dashboard');
-      }
+        this.router.navigateByUrl('/pastevents');
+    
     },
     err => {
       alert('failed to register');

@@ -1,3 +1,26 @@
-<p>
-  pastevents works!
-</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">Event Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date and Time</th>
+      <th scope="col">Capacity</th>
+      <th scope="col">Cell #</th>
+    </tr>
+  </thead>
+
+  <!-- ngIf to replate the null for unresolved status and the status or type -->
+  <tbody>
+    <tr *ngFor="let event of events">
+      <td></td>
+      <td></td>
+      <th scope="row">{{event.eventname}}</th>
+      <td>{{event.description}}</td>
+      <td>{{event.dateandtime}}</td>
+      <td>{{event.capacity}}</td>
+      <td>{{event.phonenumber}}</td>
+    </tr>
+  </tbody>
+</table>
