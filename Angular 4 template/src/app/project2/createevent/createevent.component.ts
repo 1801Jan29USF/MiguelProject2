@@ -12,6 +12,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class CreateeventComponent implements OnInit {
 
+  Users: Array<User> = [];
+
   newEvent = {
     eventname: '',
     description: '',
@@ -42,6 +44,7 @@ export class CreateeventComponent implements OnInit {
   // let username = JSON.parse(this.cookie.get('username'));
 
   ngOnInit() {
+<<<<<<< HEAD
     this.username = this.cookie.get('username');
     this.client.get('http://localhost:8000/User/CreateEvent/' + this.username)
       .subscribe(
@@ -49,6 +52,18 @@ export class CreateeventComponent implements OnInit {
           this.user = <User>data;
         }
       );
+=======
+     this.username = JSON.stringify(this.cookie.get('username'));
+    this.client.get('http://localhost:8000/User/createEvent')
+    .subscribe(
+      (succ: Array<User>) => {
+        this.Users = succ;
+      },
+      (err) => {
+        console.log('failed to load Users');
+      }
+    );
+>>>>>>> e66e9454abcd199b630797b009e17e34867a04c7
   }
 
   submitEvent() {

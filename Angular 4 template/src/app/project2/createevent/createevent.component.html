@@ -32,6 +32,12 @@
       <input type="text" name="cell" [(ngModel)]="newEvent.location.city" placeholder="City" required="required" />
       <input type="text" name="cell" [(ngModel)]="newEvent.location.state" placeholder="State" required="required" />
       <input type="text" name="cell" [(ngModel)]="newEvent.location.zipcode" placeholder="Zipcode" required="required" />
+     
+
+      <select name="type" [(ngModel)]= "User.username" *ngFor="let user of users">
+          <option>{{user.username}}</option>
+      </select>
+
       <button type="submit" class="btn btn-primary btn-block btn-large">Submit Event </button>
       <br>
     </div>
