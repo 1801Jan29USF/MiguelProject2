@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +61,14 @@ public class UserController {
 		return us.save(u);
 	}
 
-	@GetMapping(value = { "/Profile/{username}", "/CreateEvent/{username}" })
+	@GetMapping(value = "/Profile/{username}")
 	public User getProfileInfo(@PathVariable String username) {
 		return us.findByUsername(username);
+	}
+
+	@GetMapping(value = "/CreateEvent")
+	public List<User> getAllUsers() {
+		return us.findAll();
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Set<Event> findAll(String username) {
 		return ur.findByUsername(username).getUserevents();
+	}
+
+	@Override
+	public List<User> findAll() {
+		return ur.findAll();
 	}
 
 }

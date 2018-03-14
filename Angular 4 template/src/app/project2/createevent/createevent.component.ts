@@ -30,7 +30,7 @@ export class CreateeventComponent implements OnInit {
       id: 4
     },
     location: {
-      id: this.user.address,
+      id: this.user.address
     },
     host: {
       id: this.user
@@ -44,31 +44,19 @@ export class CreateeventComponent implements OnInit {
   // let username = JSON.parse(this.cookie.get('username'));
 
   ngOnInit() {
-<<<<<<< HEAD
-    this.username = this.cookie.get('username');
-    this.client.get('http://localhost:8000/User/CreateEvent/' + this.username)
-      .subscribe(
-        data => {
-          this.user = <User>data;
-        }
-      );
-=======
-     this.username = JSON.stringify(this.cookie.get('username'));
-    this.client.get('http://localhost:8000/User/createEvent')
+    this.client.get('http://localhost:8000/User/CreateEvent')
     .subscribe(
       (succ: Array<User>) => {
         this.Users = succ;
+        console.log(this.Users);
       },
       (err) => {
-        console.log('failed to load Users');
-      }
-    );
->>>>>>> e66e9454abcd199b630797b009e17e34867a04c7
+        console.log('failed to load events');
+      } );
   }
 
+
   submitEvent() {
-    console.log(this.newEvent);
-    console.log(this.user.address);
     this.client.post('http://localhost:8000/User/CreateEvent', this.newEvent)
       .subscribe(
         data => {
