@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.revature.entities.Address;
 import com.revature.entities.Event;
 import com.revature.entities.User;
-import com.revature.repos.EventRepo;
 import com.revature.repos.UserRepo;
 
 @Service
@@ -17,9 +16,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepo ur;
-
-	@Autowired
-	private EventRepo er;
 
 	@Override
 	public User save(User u) {

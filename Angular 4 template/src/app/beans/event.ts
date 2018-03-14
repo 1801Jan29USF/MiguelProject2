@@ -5,5 +5,6 @@ export class Event {
     dateandtime: string;
     capacity: number;
     phonenumber: string;
+    location: number;
 }
 

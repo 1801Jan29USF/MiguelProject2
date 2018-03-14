@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.dto.DTO;
 import com.revature.entities.Address;
 import com.revature.entities.Event;
 import com.revature.entities.User;
@@ -31,8 +30,7 @@ public class UserController {
 	private UserService us;
 
 	@PostMapping("/CreateEvent")
-	public String createEvent(@RequestBody Event e) {
-		System.out.println("ADDRESSSSSSSSS : " + e);
+	public Event createEvent(@RequestBody Event e) {
 		return es.createEvent(e);
 	}
 

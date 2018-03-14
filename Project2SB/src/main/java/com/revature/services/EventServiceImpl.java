@@ -37,17 +37,19 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public String createEvent(Event e) {
+	public Event createEvent(Event e) {
 
+		System.out.println("SICK EVENT BRO: " + e);
 		List<Event> events = er.findAllByLocation(e.getLocation());
-
+		System.out.println("here");
 		for (Event event : events) {
+			System.out.println("hnohere");
 			if (event.getdateandtime().equals(e.getdateandtime())
 					&& event.getLocation().getId() == e.getLocation().getId()) {
-				return "Event at given date and time already exists";
+				return null;
 			}
 		}
 		er.save(e);
-		return "Event successfully created";
+		return e;
 	}
 }

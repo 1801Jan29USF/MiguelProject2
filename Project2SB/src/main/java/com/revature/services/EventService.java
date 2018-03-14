@@ -12,6 +12,6 @@ public interface EventService {
 
 	ArrayList<Event> findAllByHostId(String username);
 
-	String createEvent(Event e);
+	Event createEvent(Event e);
 
 }

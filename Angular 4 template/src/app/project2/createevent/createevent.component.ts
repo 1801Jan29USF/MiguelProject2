@@ -29,14 +29,10 @@ export class CreateeventComponent implements OnInit {
     },
     location: {
       id: this.user.address,
-      street: '',
-      city: '',
-      state: '',
-      zipcode: ''
     },
     host: {
-      id: this.user.id
-      }
+      id: this.user
+    }
   };
 
   username: string;
@@ -46,29 +42,29 @@ export class CreateeventComponent implements OnInit {
   // let username = JSON.parse(this.cookie.get('username'));
 
   ngOnInit() {
-    this.username = JSON.stringify(this.cookie.get('username'));
+    this.username = this.cookie.get('username');
+    this.client.get('http://localhost:8000/User/CreateEvent/' + this.username)
+      .subscribe(
+        data => {
+          this.user = <User>data;
+        }
+      );
   }
 
   submitEvent() {
-    this.client.get('http://localhost:8000/User/CreateEvent/' + this.username)
-    .subscribe(
-    data => {
-      this.user = <User>data;
-    }
-    );
-
     console.log(this.newEvent);
+    console.log(this.user.address);
     this.client.post('http://localhost:8000/User/CreateEvent', this.newEvent)
-    .subscribe(
-      data => {
-       this.event = <Event>data;
-        alert('Event registered!');
-        this.router.navigateByUrl('/dashboard');
-      },
-      err => {
-        alert('failed to submit event');
-      }
-    );
+      .subscribe(
+        data => {
+          this.event = <Event>data;
+          alert('Event registered!');
+          this.router.navigateByUrl('/dashboard');
+        },
+        err => {
+          alert('failed to submit event');
+        }
+      );
   }
 
 }
