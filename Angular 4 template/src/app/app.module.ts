@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import {AppComponent} from './app.component';
 import {NavComponent} from './nav/nav.component';
 import { appRoutes } from './routes';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService } from 'ngx-cookie-service';
 import { User } from './beans/user';
 import { HomepageComponent } from './project2/homepage/homepage.component';
 import { DashboardComponent } from './Project2/dashboard/dashboard.component';
@@ -21,6 +21,9 @@ import { Project2loginComponent } from './Project2/project2login/project2login.c
 import { Project2registerComponent } from './Project2/project2register/project2register.component';
 import { AttendeeGuard } from './guard/attendee.guard';
 import { HostGuard } from './guard/host.guard';
+import { Event } from './beans/event';
+
+
 
 
 
@@ -50,7 +53,8 @@ import { HostGuard } from './guard/host.guard';
     CookieService,
     AttendeeGuard,
     HostGuard,
-    User
+    User,
+    Event
 
   ],
   bootstrap: [AppComponent]

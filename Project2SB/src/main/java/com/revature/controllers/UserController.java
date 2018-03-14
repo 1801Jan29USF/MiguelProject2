@@ -20,7 +20,7 @@ import com.revature.services.EventService;
 import com.revature.services.UserService;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("User")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
@@ -30,8 +30,9 @@ public class UserController {
 	@Autowired
 	private UserService us;
 
-	@PostMapping("/createEvent")
+	@PostMapping("/CreateEvent")
 	public String createEvent(@RequestBody Event e) {
+		System.out.println("ADDRESSSSSSSSS : " + e);
 		return es.createEvent(e);
 	}
 
@@ -61,9 +62,11 @@ public class UserController {
 		return us.save(u);
 	}
 
-	@GetMapping(value = { "/Profile", "/CreateEvent" })
-	public User getProfileInfo(@RequestBody DTO credentials) {
-		return us.findByUsername(credentials.username);
+	@GetMapping(value = { "/Profile/{username}", "/CreateEvent/{username}" })
+	public User getProfileInfo(@PathVariable String username) {
+		System.out.println("USERNAAAME +++" + username );
+		System.out.println(" THE GOODS: " + us.findByUsername(username));
+		return us.findByUsername(username);
 	}
 
 }

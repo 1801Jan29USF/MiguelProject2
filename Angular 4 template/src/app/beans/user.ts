@@ -6,6 +6,7 @@ export class User {
     lastname: string;
     email: string;
     bio: string;
+    address: Number;
     phonenumber: string;
 }
 
