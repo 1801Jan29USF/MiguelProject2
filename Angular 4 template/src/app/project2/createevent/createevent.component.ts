@@ -39,7 +39,7 @@ export class CreateeventComponent implements OnInit {
       }
   };
 
-  username: String;
+  username: string;
   // tslint:disable-next-line:max-line-length
   constructor(private client: HttpClient, private router: Router, private event: Event, private user: User, private cookie: CookieService) { }
 
@@ -50,7 +50,7 @@ export class CreateeventComponent implements OnInit {
   }
 
   submitEvent() {
-    this.client.get('http://localhost:8000/User/CreateEvent/{username}' + this.username)
+    this.client.get('http://localhost:8000/User/CreateEvent/' + this.username)
     .subscribe(
     data => {
       this.user = <User>data;

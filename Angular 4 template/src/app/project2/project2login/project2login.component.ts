@@ -27,6 +27,7 @@ export class Project2loginComponent implements OnInit {
       .subscribe(
         data => {
           this.user = <User>data;
+
           this.cookie.set('username', this.credential.username);
           alert(this.credential.username + ' logged in');
             this.router.navigateByUrl('/pastevents');

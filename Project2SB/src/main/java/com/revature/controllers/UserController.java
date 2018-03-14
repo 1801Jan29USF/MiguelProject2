@@ -64,8 +64,6 @@ public class UserController {
 
 	@GetMapping(value = { "/Profile/{username}", "/CreateEvent/{username}" })
 	public User getProfileInfo(@PathVariable String username) {
-		System.out.println("USERNAAAME +++" + username );
-		System.out.println(" THE GOODS: " + us.findByUsername(username));
 		return us.findByUsername(username);
 	}
 

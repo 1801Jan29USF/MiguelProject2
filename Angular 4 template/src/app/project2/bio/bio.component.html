@@ -1,3 +1,31 @@
-<p>
-  bio works!
-</p>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th scope="col">Username </th>
+        <th scope="col">Role </th>
+        <th scope="col">First Name</th>
+        <th scope="col"> Last Name</th>
+        <th scope="col">Email </th>
+        <th scope="col">Bio </th>
+        <th scope="col">Cell #</th>
+  
+      </tr>
+    </thead>
+  
+
+    <tbody>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th scope="row">{{user.username}}</th>
+          <th scope="row">{{user.role?.role}}</th>
+        <th scope="row">{{user.firstname}}</th>
+        <td>{{user.lastname}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.bio}}</td>
+        <td>{{user.phonenumber}}</td>
+    </tbody>
+  </table>
