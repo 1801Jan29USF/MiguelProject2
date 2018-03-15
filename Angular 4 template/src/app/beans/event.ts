@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export class Event {
     id: number;
     eventname: string;
@@ -17,6 +19,10 @@ export class Event {
     genre: {
         id: 0
         genre: string;
+    };
+    host: {
+        id: 0
+        username: string;
     };
 }
 
