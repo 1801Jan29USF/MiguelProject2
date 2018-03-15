@@ -12,6 +12,7 @@ export class SearcheventComponent implements OnInit {
 
   events: Array<Event> = [];
   typeFilter = '';
+  genreFilter = '';
 
   constructor(private client: HttpClient, private router: Router, private event: Event) { }
 

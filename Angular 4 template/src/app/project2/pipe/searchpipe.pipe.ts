@@ -6,8 +6,11 @@ import { Event } from '../../beans/event';
 })
 export class SearchpipePipe implements PipeTransform {
 
-  transform(events: Array<Event>, type: string): Array<Event> {
+  transform(events: Array<Event>, type: string, genre: string): Array<Event> {
+   if ( events.filter(event => event.type.type  === type)) {
     return events.filter( event => event.type.type  === type);
+
+  }
   }
 
 }
