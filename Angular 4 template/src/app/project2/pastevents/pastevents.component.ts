@@ -3,7 +3,6 @@ import { Event } from '../../beans/event';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../beans/user';
-import { CurrentUser } from '../../beans/currentuser';
 
 
 
@@ -20,7 +19,7 @@ export class PasteventsComponent implements OnInit {
   username: string;
 
   constructor(private client: HttpClient, private cookie: CookieService, 
-    private user: User, private currentuser: CurrentUser, private event: Event) { }
+    private user: User, private event: Event) { }
  //events that user hosted as his own house
  filterByHosted() {
   this.filteredevents = [];

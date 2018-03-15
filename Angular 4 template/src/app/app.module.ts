@@ -24,7 +24,7 @@ import { HostGuard } from './guard/host.guard';
 import { Event } from './beans/event';
 import { SearchpipePipe } from './project2/pipe/searchpipe.pipe';
 import { GenrepipePipe } from './project2/pipe/genrepipe.pipe';
-import { CurrentUser } from './beans/currentuser';
+
 
 
 
@@ -59,7 +59,6 @@ import { CurrentUser } from './beans/currentuser';
     AttendeeGuard,
     HostGuard,
     User,
-    CurrentUser,
     Event
 
   ],
