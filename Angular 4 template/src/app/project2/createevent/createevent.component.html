@@ -1,45 +1,50 @@
 <div class="createevent">
-	<h1>Create Event</h1>
-    <form (ngSubmit)= "submitEvent()">
+  <h1>Create Event</h1>
+  <form (ngSubmit)="submitEvent()">
 
-        
-      <div class="create">
-      <input type="text" name="e"[(ngModel)]="newEvent.eventname"  placeholder="Event Name" required="required" />
+
+    <div class="create">
+      <input type="text" name="e" [(ngModel)]="newEvent.eventname" placeholder="Event Name" required="required" />
       <input type="text" name="d" [(ngModel)]="newEvent.description" placeholder="Event Description" required="required" />
       <input type="text" name="l" [(ngModel)]="newEvent.dateandtime" placeholder="Event Location" required="required" />
       <input type="number" name="c" [(ngModel)]="newEvent.capacity" placeholder="Capacity amount" required="required" />
       <input type="text" name="cell" [(ngModel)]="newEvent.phonenumber" placeholder="Contact cell" required="required" />
-      
-      <select name="type" [(ngModel)]= "newEvent.type.id">
-      <option [ngValue]="1">MUSIC</option>
-      <option [ngValue]="2">POETRY</option>
-      <option [ngValue]="3">FILM SCREENING</option>
-      <option [ngValue]="4">ART SHOWING</option>
-      <option [ngValue]="5">PERFORMANCE ART</option>
-      <option [ngValue]="6">OTHER</option>
+      <label> Type </label>
+      <br>
+      <select name="type" [(ngModel)]="newEvent.type.id">
+        <option [ngValue]="1">MUSIC</option>
+        <option [ngValue]="2">POETRY</option>
+        <option [ngValue]="3">FILM SCREENING</option>
+        <option [ngValue]="4">ART SHOWING</option>
+        <option [ngValue]="5">PERFORMANCE ART</option>
+        <option [ngValue]="6">OTHER</option>
       </select>
-
-      <select name="type" [(ngModel)] ="newEvent.genre.id">
+      <br>
+      <label> Genre</label>
+      <br>
+      <select name="type" [(ngModel)]="newEvent.genre.id">
         <option [ngValue]="1">ROCK</option>
         <option [ngValue]="2">BLUES</option>
         <option [ngValue]="3">JAZZ</option>
         <option [ngValue]="4">HIP-HOP</option>
         <option [ngValue]="5">REGGAE</option>
         <option [ngValue]="6">INDIE</option>
-        </select>
+      </select>
 
-      <input type="text" name="cell" [(ngModel)]="newEvent.location.street" placeholder="Street" required="required" />
+      <!-- <input type="text" name="cell" [(ngModel)]="newEvent.location.street" placeholder="Street" required="required" />
       <input type="text" name="cell" [(ngModel)]="newEvent.location.city" placeholder="City" required="required" />
       <input type="text" name="cell" [(ngModel)]="newEvent.location.state" placeholder="State" required="required" />
-      <input type="text" name="cell" [(ngModel)]="newEvent.location.zipcode" placeholder="Zipcode" required="required" />
-     
+      <input type="text" name="cell" [(ngModel)]="newEvent.location.zipcode" placeholder="Zipcode" required="required" /> -->
 
-      <select name="type" [(ngModel)]= "User.username" *ngFor="let user of users">
-          <option>{{user.username}}</option>
+      <br>
+      <br>
+      <label> Host</label>
+      <select name="type" [(ngModel)]="host">
+        <option *ngFor="let user of users" [ngValue]="user.username">{{user.username}}</option>
       </select>
 
       <button type="submit" class="btn btn-primary btn-block btn-large">Submit Event </button>
       <br>
     </div>
-    </form>
+  </form>
 </div>

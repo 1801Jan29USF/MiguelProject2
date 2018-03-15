@@ -39,9 +39,8 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Event createEvent(Event e) {
 
-		System.out.println("SICK EVENT BRO: " + e);
 		List<Event> events = er.findAllByLocation(e.getLocation());
-		System.out.println("here");
+		System.out.println("ALL EVENTS" + events);
 		for (Event event : events) {
 			System.out.println("hnohere");
 			if (event.getdateandtime().equals(e.getdateandtime())
@@ -49,7 +48,9 @@ public class EventServiceImpl implements EventService {
 				return null;
 			}
 		}
+		System.out.println("Made it here " + e);
 		er.save(e);
+		System.out.println("ALSO here" + e);
 		return e;
 	}
 }

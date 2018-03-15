@@ -1,3 +1,59 @@
-<p>
-  searchevent works!
-</p>
+
+<div class="center">
+  <label for="type-filter"></label>
+  <input type="text" name="power-filter" [(ngModel)]="typeFilter"  placeholder="Enter Event type">
+  
+
+
+
+
+
+
+
+
+ <!-- <select name="type">
+    <option *ngFor="let event of events" [ngValue]="event.type.type">{{event.type.type}}</option>
+  </select>
+  <select name="genre">
+      <option *ngFor="let event of events" [ngValue]="event.genre.genre">{{event.genre.genre}}</option>
+    </select> -->
+    <!-- <select name="location">
+        <option *ngFor="let event of events" [ngValue]="event.address.city">{{event.address.city}}</option>
+      </select> -->
+      
+</div>
+
+
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col">Event Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Date and Time</th>
+          <th scope="col">Capacity</th>
+          <th scope="col">Cell #</th>
+          <th scope="col">Type</th>
+          <th scope="col">Genre</th>
+    
+    
+        </tr>
+      </thead>
+    
+      <!-- ngIf to replate the null for unresolved status and the status or type -->
+      <tbody>
+        <label>Search by Type</label>
+        <tr *ngFor="let event of (events | searchpipe:typeFilter)"> 
+          <td></td>
+          <td></td>
+          <th scope="row">{{event.eventname}}</th>
+          <td>{{event.description}}</td>
+          <td>{{event.dateandtime}}</td>
+          <td>{{event.capacity}}</td>
+          <td>{{event.phonenumber}}</td>
+          <td>{{event.type.type}}</td>
+          <td>{{event.genre.genre}}</td>
+        </tr>
+      </tbody>
+    </table>

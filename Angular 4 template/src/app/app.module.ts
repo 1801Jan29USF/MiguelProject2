@@ -22,6 +22,7 @@ import { Project2registerComponent } from './Project2/project2register/project2r
 import { AttendeeGuard } from './guard/attendee.guard';
 import { HostGuard } from './guard/host.guard';
 import { Event } from './beans/event';
+import { SearchpipePipe } from './project2/pipe/searchpipe.pipe';
 
 
 
@@ -48,6 +49,7 @@ import { Event } from './beans/event';
     PasteventsComponent,
     Project2loginComponent,
     Project2registerComponent,
+    SearchpipePipe,
   ],
   providers: [
     CookieService,

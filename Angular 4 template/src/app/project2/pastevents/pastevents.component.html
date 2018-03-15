@@ -1,3 +1,12 @@
+<br>
+<div class="center">
+<button class="btn btn-primary" (click)="status=0">All</button>
+<button class="btn btn-warning" (click)="status=1">Hosted</button>
+<button class="btn btn-success" (click)="status=2">Approved</button>
+<button class="btn btn-success" (click)="status=2">Pending</button>
+<button class="btn btn-danger" (click)="status=3">Denied</button>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -8,6 +17,10 @@
       <th scope="col">Date and Time</th>
       <th scope="col">Capacity</th>
       <th scope="col">Cell #</th>
+      <th scope="col">Type</th>
+      <th scope="col">Status</th>
+
+
     </tr>
   </thead>
 
@@ -21,6 +34,8 @@
       <td>{{event.dateandtime}}</td>
       <td>{{event.capacity}}</td>
       <td>{{event.phonenumber}}</td>
+      <td>{{event.type.type}}</td>
+      <td>{{event.status.status}}</td>
     </tr>
   </tbody>
 </table>

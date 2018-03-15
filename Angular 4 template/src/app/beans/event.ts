@@ -6,5 +6,17 @@ export class Event {
     capacity: number;
     phonenumber: string;
     location: number;
+    status: {
+        id: 0
+        status: string;
+    };
+    type: {
+        id: 0
+        type: string;
+    };
+    genre: {
+        id: 0
+        genre: string;
+    };
 }
 

@@ -4,12 +4,18 @@ export class User {
         id: number;
         role: String;
     };
-    id: Number;
+    id: number;
     firstname: string;
     lastname: string;
     email: string;
     bio: string;
-    address:  Number;
+    address: {
+        id: number,
+        street: string,
+        city: string,
+        zipcode: string,
+        state: string
+    };
     phonenumber: string;
 }
 
