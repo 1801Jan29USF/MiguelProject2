@@ -6,7 +6,7 @@
       <input type="text" name="u" placeholder="Username" [(ngModel)]="newUser.username"required="required" />
       <input type="password" name="p" placeholder="Password" [(ngModel)]="newUser.password" required="required" />
 
-
+    <div class="city">
       <input type="text" name="a" [(ngModel)]="newUser.address.street" placeholder="Street" required="required" />
       <input type="text" name="c" [(ngModel)]="newUser.address.city" placeholder="City" required="required" />
       <input type="text" name="s" [(ngModel)]="newUser.address.state" placeholder="State" required="required" />
@@ -17,5 +17,6 @@
       <input type="text" name="e" placeholder="Email" [(ngModel)]="newUser.email" required="required" />
         <input type="text" name="ph" placeholder="PhoneNumber" [(ngModel)]="newUser.phonenumber" required="required" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Sign Up </button>
+        </div>
     </form>
 </div>

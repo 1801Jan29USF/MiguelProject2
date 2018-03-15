@@ -3,6 +3,7 @@ import { Event } from '../../beans/event';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../beans/user';
+import { CurrentUser } from '../../beans/currentuser';
 
 
 
@@ -18,8 +19,17 @@ export class PasteventsComponent implements OnInit {
   events: Array<Event> = [];
   username: string;
 
-  constructor(private client: HttpClient, private cookie: CookieService, private user: User, private event: Event) { }
-
+  constructor(private client: HttpClient, private cookie: CookieService, 
+    private user: User, private currentuser: CurrentUser, private event: Event) { }
+ //events that user hosted as his own house
+ filterByHosted() {
+  this.filteredevents = [];
+  this.events.forEach((event, index) => {
+    if (event.host.username === this.cookie.get('username')) {
+      this.filteredevents.push(event);
+    }
+  });
+}
 
   ngOnInit() {
     this.client.get('http://localhost:8000/events/searchEvents')
@@ -27,21 +37,14 @@ export class PasteventsComponent implements OnInit {
         (succ: Array<Event>) => {
           this.events = succ;
           console.log(this.events);
+          // console.log(this.currentuser.getAddress);
+          this.filterByHosted();
         },
         (err) => {
           console.log('failed to load events');
         });
   }
 
-  //events that user hosted as his own house
-  filterByHosted() {
-    this.filteredevents = [];
-    this.events.forEach((event, index) => {
-      if (event.host.username === this.cookie.get('username')) {
-        this.filteredevents.push(event);
-      }
-    });
-  }
 
   filterByPending() {
     this.filteredevents = [];
@@ -69,5 +72,13 @@ export class PasteventsComponent implements OnInit {
       }
     });
   }
-
+  
+  filterByMyAddress() {
+    this.filteredevents = [];
+    this.events.forEach((event, index) => {
+      if (event.location ) {
+        this.filteredevents.push(event);
+      }
+    });
+  }
 }

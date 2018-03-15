@@ -1,7 +1,7 @@
 <br>
 <div class="center">
-<button class="btn btn-primary" (click)="status=0">All</button>
-<button class="btn btn-warning" (click)="filterByHosted()">Hosted</button>
+<button class="btn btn-warning" (click)="filterByHosted()">Hosted At My House</button>
+<button class="btn btn-warning" (click)="filterByMyAddress()">Hosted At My House By Others</button>
 <button class="btn btn-success" (click)="filterByApproved()">Approved</button>
 <button class="btn btn-success" (click)="filterByPending()">Pending</button>
 <button class="btn btn-danger" (click)="filterByDenied()">Denied</button>
@@ -10,6 +10,8 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col">Event Name</th>
@@ -27,6 +29,8 @@
   <!-- ngIf to replate the null for unresolved status and the status or type -->
   <tbody>
     <tr *ngFor="let event of filteredevents">
+      <td></td>
+      <td></td>
       <td></td>
       <td></td>
       <th scope="row">{{event.eventname}}</th>
