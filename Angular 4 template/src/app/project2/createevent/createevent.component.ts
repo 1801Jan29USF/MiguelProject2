@@ -22,7 +22,6 @@ export class CreateeventComponent implements OnInit {
     dateandtime: '',
     capacity: '',
     phonenumber: '',
-    attending: 0,
     type: {
       id: 0
     },
@@ -37,7 +36,7 @@ export class CreateeventComponent implements OnInit {
     },
     host: {
       id: 0
-    }
+    },
   };
 
   username: string;

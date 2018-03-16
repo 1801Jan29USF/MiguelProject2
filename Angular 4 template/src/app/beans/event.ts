@@ -7,7 +7,13 @@ export class Event {
     dateandtime: string;
     capacity: number;
     phonenumber: string;
-    location: number;
+    location: {
+        id: 0
+        street: string;
+        city: string;
+        state: string;
+        zipcode: string;
+    };
     status: {
         id: 0
         status: string;

@@ -1,7 +1,5 @@
 package com.revature.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -9,13 +7,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users_event")
-public class UsersEvents implements Serializable {
+public class UsersEvents {
 
 	@Id
 	@JoinColumn(name = "user_id")
 	private int userid;
 
-	@Id
 	@JoinColumn(name = "event_id")
 	private int eventid;
 

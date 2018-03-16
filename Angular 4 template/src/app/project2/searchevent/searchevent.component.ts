@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Event } from '../../beans/event';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-searchevent',
@@ -12,16 +13,22 @@ export class SearcheventComponent implements OnInit {
 
    Attending = {
     attending: 0,
+    username: '',
+    eventid: 0
   };
 
   events: Array<Event> = [];
   typeFilter = '';
   genreFilter = '';
+  cityFilter = '';
 
-  constructor(private client: HttpClient, private router: Router, private event: Event) { }
+  constructor(private client: HttpClient, private router: Router, private event: Event, private cookie: CookieService) { }
 
-  Approved(attending: number) {
+  Approved(attending: number, eventid: number) {
+
+    this.Attending.username = this.cookie.get('username');
     this.Attending.attending = attending;
+    this.Attending.eventid = eventid;
     this.client.post('http://localhost:8000/events/searchEvents', this.Attending ).subscribe(
    (succ) => {
      this.ngOnInit();

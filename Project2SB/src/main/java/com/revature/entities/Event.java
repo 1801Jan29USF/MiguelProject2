@@ -59,13 +59,16 @@ public class Event {
 	@JoinColumn(name = "host_id")
 	private User host;
 
+	@Column(name = "attending")
+	private int attending;
+
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Event(int id, String eventname, String description, Address location, String dateandtime, int capacity,
-			String phonenumber, File attachment, Type type, Status status, Genre genre, User host) {
+			String phonenumber, File attachment, Type type, Status status, Genre genre, User host, int attending) {
 		super();
 		this.id = id;
 		this.eventname = eventname;
@@ -79,6 +82,7 @@ public class Event {
 		this.status = status;
 		this.genre = genre;
 		this.host = host;
+		this.attending = attending;
 	}
 
 	@Override
@@ -86,7 +90,7 @@ public class Event {
 		return "Event [id=" + id + ", eventname=" + eventname + ", description=" + description + ", location="
 				+ location + ", dateandtime=" + dateandtime + ", capacity=" + capacity + ", phonenumber=" + phonenumber
 				+ ", attachment=" + attachment + ", type=" + type + ", status=" + status + ", genre=" + genre
-				+ ", host=" + host + "]";
+				+ ", host=" + host + ", attending=" + attending + "]";
 	}
 
 	@Override
@@ -94,6 +98,7 @@ public class Event {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((attachment == null) ? 0 : attachment.hashCode());
+		result = prime * result + attending;
 		result = prime * result + capacity;
 		result = prime * result + ((dateandtime == null) ? 0 : dateandtime.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -121,6 +126,8 @@ public class Event {
 			if (other.attachment != null)
 				return false;
 		} else if (!attachment.equals(other.attachment))
+			return false;
+		if (attending != other.attending)
 			return false;
 		if (capacity != other.capacity)
 			return false;
@@ -206,11 +213,11 @@ public class Event {
 		this.location = location;
 	}
 
-	public String getdateandtime() {
+	public String getDateandtime() {
 		return dateandtime;
 	}
 
-	public void setdateandtime(String dateandtime) {
+	public void setDateandtime(String dateandtime) {
 		this.dateandtime = dateandtime;
 	}
 
@@ -268,6 +275,14 @@ public class Event {
 
 	public void setHost(User host) {
 		this.host = host;
+	}
+
+	public int getAttending() {
+		return attending;
+	}
+
+	public void setAttending(int attending) {
+		this.attending = attending;
 	}
 
 }

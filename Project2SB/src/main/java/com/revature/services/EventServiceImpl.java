@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.Event;
+import com.revature.entities.User;
+import com.revature.entities.UsersEvents;
 import com.revature.repos.EventRepo;
 import com.revature.repos.UserRepo;
+import com.revature.repos.UsersEventsRepo;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -18,6 +21,9 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private UserRepo ur;
+
+	@Autowired
+	private UsersEventsRepo uer;
 
 	@Override
 	public Event save(Event e) {
@@ -43,7 +49,7 @@ public class EventServiceImpl implements EventService {
 		System.out.println("ALL EVENTS" + events);
 		for (Event event : events) {
 			System.out.println("hnohere");
-			if (event.getdateandtime().equals(e.getdateandtime())
+			if (event.getDateandtime().equals(e.getDateandtime())
 					&& event.getLocation().getId() == e.getLocation().getId()) {
 				return null;
 			}
@@ -52,5 +58,18 @@ public class EventServiceImpl implements EventService {
 		er.save(e);
 		System.out.println("ALSO here" + e);
 		return e;
+	}
+
+	@Override
+	public void updateEvent(String username, int eventid, int attending) {
+		User user = ur.findByUsername(username);
+		int id = user.getId();
+		UsersEvents ue = new UsersEvents(id, eventid);
+		uer.save(ue);
+
+		Event event = er.findById(eventid);
+		event.setAttending(event.getAttending() + attending);
+		er.save(event);
+
 	}
 }

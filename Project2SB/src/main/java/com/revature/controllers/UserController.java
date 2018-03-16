@@ -33,8 +33,6 @@ public class UserController {
 
 	@PostMapping("/CreateEvent")
 	public Event createEvent(@RequestBody Event e) {
-		System.out.println("NEW EVENT::::::" + e);
-
 		return es.createEvent(e);
 	}
 
