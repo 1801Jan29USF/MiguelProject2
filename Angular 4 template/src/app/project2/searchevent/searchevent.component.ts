@@ -14,7 +14,7 @@ export class SearcheventComponent implements OnInit {
    Attending = {
     attending: 0,
     username: '',
-    eventid: 0
+    id: 0
   };
 
   events: Array<Event> = [];
@@ -24,11 +24,11 @@ export class SearcheventComponent implements OnInit {
 
   constructor(private client: HttpClient, private router: Router, private event: Event, private cookie: CookieService) { }
 
-  Approved(attending: number, eventid: number) {
+  Approved(attending: number, id: number) {
 
     this.Attending.username = this.cookie.get('username');
     this.Attending.attending = attending;
-    this.Attending.eventid = eventid;
+    this.Attending.id = id;
     this.client.post('http://localhost:8000/events/searchEvents', this.Attending ).subscribe(
    (succ) => {
      this.ngOnInit();

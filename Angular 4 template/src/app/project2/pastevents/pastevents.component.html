@@ -40,6 +40,14 @@
       <td>{{event.phonenumber}}</td>
       <td>{{event.type.type}}</td>
       <td>{{event.status.status}}</td>
+
+
+      <td>
+          <form class="ui-group-buttons">
+              <button type="button" class="btn btn-primary" (click)="Approval(1, event.id)">Approve</button>
+              <button type="button" class="btn btn-success" (click)="Approval(2, event.id)">Denied</button>
+          </form>
+        </td>
     </tr>
   </tbody>
 </table>

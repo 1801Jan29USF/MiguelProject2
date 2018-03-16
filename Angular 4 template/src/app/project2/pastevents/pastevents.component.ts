@@ -13,13 +13,38 @@ import { User } from '../../beans/user';
 })
 export class PasteventsComponent implements OnInit {
 
+  Approve = {
+    status: 0,
+    username: '',
+    id: 0
+  };
+
 
   filteredevents: Array<Event> = [];
   events: Array<Event> = [];
   username: string;
 
+
+
   constructor(private client: HttpClient, private cookie: CookieService, 
     private user: User, private event: Event) { }
+
+    Approval(status: number, id: number) {
+
+      this.Approve.username = this.cookie.get('username');
+      this.Approve.status = status;
+      this.Approve.id = id;
+      this.client.post('http://localhost:8000/events/searchEvents', this.Approve ).subscribe(
+     (succ) => {
+       this.ngOnInit();
+     },
+     (err) => {
+       alert('Failed to Approve');
+     }
+      );
+     }
+
+
  //events that user hosted as his own house
  filterByHosted() {
   this.filteredevents = [];

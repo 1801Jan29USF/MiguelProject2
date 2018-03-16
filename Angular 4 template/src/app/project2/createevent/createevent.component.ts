@@ -22,6 +22,7 @@ export class CreateeventComponent implements OnInit {
     dateandtime: '',
     capacity: '',
     phonenumber: '',
+    attending: 0,
     type: {
       id: 0
     },
