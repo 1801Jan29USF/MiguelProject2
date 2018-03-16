@@ -10,11 +10,27 @@ import { Router } from '@angular/router';
 })
 export class SearcheventComponent implements OnInit {
 
+   Attending = {
+    attending: 0,
+  };
+
   events: Array<Event> = [];
   typeFilter = '';
   genreFilter = '';
 
   constructor(private client: HttpClient, private router: Router, private event: Event) { }
+
+  Approved(attending: number) {
+    this.Attending.attending = attending;
+    this.client.post('http://localhost:8000/events/searchEvents', this.Attending ).subscribe(
+   (succ) => {
+     this.ngOnInit();
+   },
+   (err) => {
+     alert('Failed to RSVP');
+   }
+    );
+   }
 
   ngOnInit() {
     this.client.get('http://localhost:8000/events/searchEvents')

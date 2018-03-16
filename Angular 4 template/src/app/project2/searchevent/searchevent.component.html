@@ -28,6 +28,8 @@
   <table class="table table-striped">
       <thead>
         <tr>
+          <th scope="col"></th>          
+          <th scope="col"></th>          
           <th scope="col"></th>
           <th scope="col"></th>
           <th scope="col">Event Name</th>
@@ -38,6 +40,7 @@
           <th scope="col">Type</th>
           <th scope="col">Genre</th>
           
+          
     
     
         </tr>
@@ -45,7 +48,9 @@
     
       <!-- ngIf to replate the null for unresolved status and the status or type -->
       <tbody>
-        <tr *ngFor="let event of events | searchpipe:typeFilter:genreFilter"> 
+        <tr *ngFor="let event of events | searchpipe:typeFilter:genreFilter">
+            <td></td>             
+            <td></td> 
             <td></td>
             <td></td>
             <th scope="row">{{event.eventname}}</th>
@@ -55,6 +60,13 @@
             <td>{{event.phonenumber}}</td>
             <td>{{event.type.type}}</td>
             <td>{{event.genre.genre}}</td>
+
+            <td>
+                <form class="ui-group-buttons">
+                    <button type="button" class="btn btn-primary" (click)="Approved(1,Attending.attending)">Attending</button>
+                    <button type="button" class="btn btn-success" (click)="Approved(0, Attending.attending)">Not Attending</button>
+                </form>
+              </td>
         </tr>
       </tbody>
     </table>
