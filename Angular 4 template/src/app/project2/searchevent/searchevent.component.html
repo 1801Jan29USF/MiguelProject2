@@ -2,9 +2,6 @@
 <div class="center">
   <label for="type-filter"></label>
   <input type="text" name="power-filter" [(ngModel)]="typeFilter"  placeholder="Enter Event Type">
-
- 
-
   <label for="genre-filter"></label>
   <input type="text" name="genre-filter" [(ngModel)]="genreFilter"  placeholder="Enter Genre Type">
 
@@ -40,6 +37,7 @@
           <th scope="col">Cell #</th>
           <th scope="col">Type</th>
           <th scope="col">Genre</th>
+          
     
     
         </tr>
@@ -47,7 +45,7 @@
     
       <!-- ngIf to replate the null for unresolved status and the status or type -->
       <tbody>
-        <tr *ngFor="let event of (events | searchpipe:typeFilter)"> 
+        <tr *ngFor="let event of events | searchpipe:typeFilter:genreFilter"> 
             <td></td>
             <td></td>
             <th scope="row">{{event.eventname}}</th>
@@ -58,18 +56,5 @@
             <td>{{event.type.type}}</td>
             <td>{{event.genre.genre}}</td>
         </tr>
-
-        <tr *ngFor="let event of (events | genrepipe:genreFilter)">  
-          <td></td>
-          <td></td>
-          <th scope="row">{{event.eventname}}</th>
-          <td>{{event.description}}</td>
-          <td>{{event.dateandtime}}</td>
-          <td>{{event.capacity}}</td>
-          <td>{{event.phonenumber}}</td>
-          <td>{{event.type.type}}</td>
-          <td>{{event.genre.genre}}</td>
-        </tr>
-        
       </tbody>
     </table>
