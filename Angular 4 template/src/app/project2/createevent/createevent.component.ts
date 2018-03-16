@@ -16,6 +16,7 @@ export class CreateeventComponent implements OnInit {
   host: string;
 
   newEvent = {
+    id: 0,
     eventname: '',
     description: '',
     dateandtime: '',
@@ -35,10 +36,6 @@ export class CreateeventComponent implements OnInit {
     },
     host: {
       id: 0
-    },
-    userevents: {
-      'user_id': 0,
-      'event_id': 0
     }
   };
 
@@ -68,7 +65,6 @@ export class CreateeventComponent implements OnInit {
         // tslint:disable-next-line:no-unused-expression
         this.newEvent.host.id = user.id;
         this.newEvent.location.id = user.address.id;
-        this.newEvent.userevents.user_id = user.id;
       }
     });
     console.log(this.newEvent);

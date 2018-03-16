@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.entities.Address;
 import com.revature.entities.Event;
 import com.revature.entities.User;
+import com.revature.entities.UsersEvents;
 import com.revature.services.EventService;
 import com.revature.services.UserService;
 
@@ -33,7 +34,7 @@ public class UserController {
 	@PostMapping("/CreateEvent")
 	public Event createEvent(@RequestBody Event e) {
 		System.out.println("NEW EVENT::::::" + e);
-		
+
 		return es.createEvent(e);
 	}
 
