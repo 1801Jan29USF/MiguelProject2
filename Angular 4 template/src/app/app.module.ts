@@ -23,7 +23,9 @@ import { AttendeeGuard } from './guard/attendee.guard';
 import { HostGuard } from './guard/host.guard';
 import { Event } from './beans/event';
 import { SearchpipePipe } from './project2/pipe/searchpipe.pipe';
-import { GenrepipePipe } from './project2/pipe/genrepipe.pipe';
+import { GenrePipe } from './project2/pipe/genre.pipe';
+import { LocationPipe } from './Project2/pipe/location.pipe';
+
 
 
 
@@ -52,7 +54,8 @@ import { GenrepipePipe } from './project2/pipe/genrepipe.pipe';
     Project2loginComponent,
     Project2registerComponent,
     SearchpipePipe,
-    GenrepipePipe
+    GenrePipe,
+    LocationPipe
   ],
   providers: [
     CookieService,

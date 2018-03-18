@@ -40,7 +40,7 @@
       <br>
       <label> Host</label>
       <select name="type" [(ngModel)]="host">
-        <option *ngFor="let user of users" [ngValue]="user.username">{{user.username}}</option>
+        <option *ngFor="let user of users" [ngValue]="user.username" >{{user.username}}</option>
       </select>
 
       <button type="submit" class="btn btn-primary btn-block btn-large">Submit Event </button>

@@ -30,7 +30,7 @@ export class CreateeventComponent implements OnInit {
       id: 0
     },
     status: {
-      id: 4
+      id: 3
     },
     location: {
       id: 0
@@ -60,6 +60,9 @@ export class CreateeventComponent implements OnInit {
 
 
   submitEvent() {
+    if (this.host === this.cookie.get('username')) {
+        this.newEvent.status.id = 4;
+    }
 
     this.users.forEach((user, index) => {
       if (user.username === this.host) {

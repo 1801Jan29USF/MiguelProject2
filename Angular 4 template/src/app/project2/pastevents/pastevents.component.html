@@ -1,7 +1,6 @@
 <br>
 <div class="center">
 <button class="btn btn-warning" (click)="filterByHosted()">Hosted At My House</button>
-<button class="btn btn-warning" (click)="filterByMyAddress()">Hosted At My House By Others</button>
 <button class="btn btn-success" (click)="filterByApproved()">Approved</button>
 <button class="btn btn-success" (click)="filterByPending()">Pending</button>
 <button class="btn btn-danger" (click)="filterByDenied()">Denied</button>
@@ -44,8 +43,8 @@
 
       <td>
           <form class="ui-group-buttons">
-              <button type="button" class="btn btn-primary" (click)="Approval(1, event.id)">Approve</button>
-              <button type="button" class="btn btn-success" (click)="Approval(2, event.id)">Denied</button>
+              <button type="button" class="btn btn-primary" (click)="Approval(1, event.id)" *ngIf="event.host.id!=event.host.id">Approve</button>
+              <button type="button" class="btn btn-success" (click)="Approval(2, event.id)" *ngIf="event.host.id!=event.host.id">Denied</button>
           </form>
         </td>
     </tr>

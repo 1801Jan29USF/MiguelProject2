@@ -96,7 +96,7 @@ export class PasteventsComponent implements OnInit {
       }
     });
   }
-  
+
   filterByMyAddress() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
