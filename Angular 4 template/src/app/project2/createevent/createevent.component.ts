@@ -40,13 +40,13 @@ export class CreateeventComponent implements OnInit {
     },
   };
 
-  username: string;
   // tslint:disable-next-line:max-line-length
   constructor(private client: HttpClient, private router: Router, private event: Event, private user: User, private cookie: CookieService) { }
 
   // let username = JSON.parse(this.cookie.get('username'));
 
   ngOnInit() {
+    console.log(this.cookie.get('username'));
     this.client.get('http://localhost:8000/User/CreateEvent')
       .subscribe(
         (succ: Array<User>) => {
@@ -59,17 +59,21 @@ export class CreateeventComponent implements OnInit {
 
 
   submitEvent() {
+    console.log(this.host);
     if (this.host === this.cookie.get('username')) {
-        this.newEvent.status.id = 4;
+      this.newEvent.status.id = 4;
     }
 
     this.users.forEach((user, index) => {
       if (user.username === this.host) {
-        console.log("USER");
-        console.log(user);
+        // tslint:disable-next-line:no-unused-expression
+        this.newEvent.location.id = user.address.id;
+      }
+    });
+    this.users.forEach((user, index) => {
+      if (user.username === this.cookie.get('username')) {
         // tslint:disable-next-line:no-unused-expression
         this.newEvent.host.id = user.id;
-        this.newEvent.location.id = user.address.id;
       }
     });
     console.log('NEWEVENT');

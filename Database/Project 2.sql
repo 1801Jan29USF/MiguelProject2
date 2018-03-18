@@ -103,6 +103,7 @@ foreign key (role_id) REFERENCES user_role (user_role_id);
 /*******************************************************************************
   Event Table
 ********************************************************************************/
+
 create table event(
 event_id number primary key not null,
 host_id number not null,
@@ -111,7 +112,7 @@ description varchar2(200) not null,
 location_id number,
 date_and_time varchar2(50) not null,
 capacity number,
-phone_number number not null, 
+phone_number varchar2(50) not null, 
 attachment blob,
 attending number,
 type_id number,
