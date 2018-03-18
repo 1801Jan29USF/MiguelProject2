@@ -1,12 +1,7 @@
 
 <div class="center">
   
-  <input type="text" name="type-filter" [(ngModel)]="typeFilter"  placeholder="Enter Event Type">
-
-  
-  <!-- <input type="text" name="genre-filter" [(ngModel)]="genreFilter"  placeholder="Enter Genre Type "> -->
-
-  
+  <input type="text" name="type-filter" [(ngModel)]="typeFilter"  placeholder="Enter Event Type">  
   <input type="text" name="city-filter" [(ngModel)]="cityFilter"  placeholder="Enter City ">
 
 
@@ -51,7 +46,7 @@
     
       <!-- ngIf to replate the null for unresolved status and the status or type -->
       <tbody>
-        <tr *ngFor="let event of (events | searchpipe: typeFilter | location: cityFilter)">
+        <tr *ngFor="let event of (filteredevents | searchpipe: typeFilter | location: cityFilter)">
             <td></td>             
             <td></td> 
             <td></td>

@@ -1,6 +1,6 @@
 <div class="register">
 	<h1>Register</h1>
-    <form (ngSubmit)="register()">
+    <form (ngSubmit)="register()" >
     	<input type="text" name="first" placeholder="First Name" [(ngModel)]="newUser.firstname" required="required" />
       <input type="text" name="last" placeholder="Last Name" [(ngModel)]="newUser.lastname"required="required" />
       <input type="text" name="u" placeholder="Username" [(ngModel)]="newUser.username"required="required" />
@@ -15,8 +15,22 @@
 
       <input type="text" name="b" placeholder="Self-Description" [(ngModel)]="newUser.bio" required="required" />
       <input type="text" name="e" placeholder="Email" [(ngModel)]="newUser.email" required="required" />
-        <input type="text" name="ph" placeholder="PhoneNumber" [(ngModel)]="newUser.phonenumber" required="required" />
+      <input type="text" name="ph" placeholder="PhoneNumber" [(ngModel)]="newUser.phonenumber" required="required" />
+        
+      <div class="container2" required>
+            <p>Attende or Host?</p>
+            
+        <label for="toggle1">Host </label>
+            <input [ngClass]="{selected: newUser.role.id === 1}" id="1" type="checkbox" ng-model="checkbox" (click)="newUser.role.id = 1" value=1>
+        
+            
+        <label for="toggle2">Attendee </label>
+            <input [ngClass]="{selected: newUser.role.id === 2}" id="2" type="checkbox" ng-model="checkbox" (click)="newUser.role.id = 2" value=2>
+
+            </div>
+       
         <button type="submit" class="btn btn-primary btn-block btn-large">Sign Up </button>
         </div>
+
     </form>
 </div>
