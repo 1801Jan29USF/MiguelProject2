@@ -44,9 +44,9 @@
 
       <td>
           <form class="ui-group-buttons">
-              <button type="button" class="btn btn-primary" (click)="Approval(1, event.id)" *ngIf = "(event.location.id !== this.useraddress)
+              <button type="button" class="btn btn-primary" (click)="Approval(1, event.id)" *ngIf = "(event.location.id === this.useraddress)
                && (event.status.id != 4) && (event.host.username !== this.username)">Approve</button>
-              <button type="button" class="btn btn-success" (click)="Approval(2, event.id)" *ngIf = "(event.location.id !== this.useraddress)
+              <button type="button" class="btn btn-success" (click)="Approval(2, event.id)" *ngIf = "(event.location.id === this.useraddress)
                && (event.status.id != 4) && (event.host.username !== this.username)">Denied</button>
           </form>
         </td>

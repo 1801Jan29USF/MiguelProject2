@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.Event;
+import com.revature.entities.Genre;
 import com.revature.entities.Status;
+import com.revature.entities.Type;
 import com.revature.entities.User;
 import com.revature.entities.UsersEvents;
 import com.revature.repos.EventRepo;
@@ -34,12 +36,27 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> findAll(String username) {
 		List<Event> events = new ArrayList<Event>();
-		Event temp = new Event();
-		User hosttemp = ur.findByUsername(username);
-		temp.setLocation(hosttemp.getAddress());
-		temp.setHost(hosttemp);
+			
+		Type typetemp = new Type(1, "fake");
+		
+		Status statustemp = new Status(1, "fake");
+		
+		Genre genretemp = new Genre(1,"fake");
+		
+		User currentUser = ur.findByUsername(username);
+		
+		
+				
+		Event temp = new Event(1, "fake", "fake", null, "fake", 0, "fake", null, typetemp, statustemp, genretemp, null, 0);
+				
 		events = er.findAll();
+	
+
+		temp.setLocation(currentUser.getAddress());
+		temp.setHost(currentUser);
+		temp.setId(1);
 		events.add(temp);
+		System.out.println("TRICKY EVENTS: " + events);
 		return events;
 	}
 

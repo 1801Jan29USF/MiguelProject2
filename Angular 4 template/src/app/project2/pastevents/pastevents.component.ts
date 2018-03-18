@@ -45,10 +45,11 @@ export class PasteventsComponent implements OnInit {
 
   getCurrentAddress() {
     this.events.forEach((event, index) => {
-
+      console.log('ALL EVENTS:::: ');
+      console.log(this.events);
+      console.log('who am i ' + event.host.username);
       if (event.host.username === this.cookie.get('username')) {
-        this.useraddress = event.host.id;
-        this.events.pop();
+        this.useraddress = event.location.id;
         console.log('Current User Address ' + this.useraddress);
         console.log('Current User Username ' + this.cookie.get('username'));
       }
@@ -57,13 +58,12 @@ export class PasteventsComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.client.get('http://localhost:8000/events/pastEvents/' + this.cookie.get('username'))
       .subscribe(
         (succ: Array<Event>) => {
           this.events = succ;
-          console.log(this.events);
           this.getCurrentAddress();
+          this.events.pop();
           this.filterByHosted();
         },
         (err) => {
@@ -114,7 +114,7 @@ export class PasteventsComponent implements OnInit {
   filterByRequest() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.location.id !== this.useraddress && (this.cookie.get('username') !== event.host.username)) {
+      if (event.location.id === this.useraddress && (this.cookie.get('username') !== event.host.username)) {
         this.filteredevents.push(event);
       }
     });
