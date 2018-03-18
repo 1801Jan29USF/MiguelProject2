@@ -40,13 +40,11 @@ public class EventServiceImpl implements EventService {
 		temp.setHost(hosttemp);
 		events = er.findAll();
 		events.add(temp);
-
 		return events;
 	}
 
 	@Override
 	public ArrayList<Event> findAllByHostId(String username) {
-
 		return er.findByHostId(ur.findByUsername(username).getId());
 
 	}
@@ -67,22 +65,20 @@ public class EventServiceImpl implements EventService {
 
 	// attending
 	@Override
-	public void attendEvent(String username, int eventid, int attending) {
+	public Event attendEvent(String username, int eventid, int attending) {
 		User user = ur.findByUsername(username);
 		int id = user.getId();
 		UsersEvents ue = new UsersEvents(id, eventid);
 		uer.save(ue);
-
 		Event event = er.findById(eventid);
 		event.setAttending(event.getAttending() + attending);
-		er.save(event);
+		return er.save(event);
 
 	}
 
 	@Override
 	public void approveEvent(int eventid, int status) {
 		Event e = er.findById(eventid);
-		System.out.println("EVENTTTT:" + e);
 		Status s = new Status();
 		s.setId(status);
 		e.setStatus(s);

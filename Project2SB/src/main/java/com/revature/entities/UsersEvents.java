@@ -1,8 +1,8 @@
 package com.revature.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -10,26 +10,26 @@ import javax.persistence.Table;
 public class UsersEvents {
 
 	@Id
-	@JoinColumn(name = "user_id")
+	@Column(name = "user_id")
 	private int userid;
 
-	@JoinColumn(name = "event_id")
+	@Column(name = "event_id")
 	private int eventid;
 
-	public int getUserid() {
-		return userid;
+	public UsersEvents() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setUserid(int userid) {
+	public UsersEvents(int userid, int eventid) {
+		super();
 		this.userid = userid;
-	}
-
-	public int getEventid() {
-		return eventid;
-	}
-
-	public void setEventid(int eventid) {
 		this.eventid = eventid;
+	}
+
+	@Override
+	public String toString() {
+		return "UsersEvents [userid=" + userid + ", eventid=" + eventid + "]";
 	}
 
 	@Override
@@ -57,20 +57,20 @@ public class UsersEvents {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "UsersEvents [userid=" + userid + ", eventid=" + eventid + "]";
+	public int getUserid() {
+		return userid;
 	}
 
-	public UsersEvents(int userid, int eventid) {
-		super();
+	public void setUserid(int userid) {
 		this.userid = userid;
-		this.eventid = eventid;
 	}
 
-	public UsersEvents() {
-		super();
-		// TODO Auto-generated constructor stub
+	public int getEventid() {
+		return eventid;
+	}
+
+	public void setEventid(int eventid) {
+		this.eventid = eventid;
 	}
 
 }

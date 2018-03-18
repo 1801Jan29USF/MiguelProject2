@@ -25,7 +25,7 @@ public class EventController {
 	private EventService es;
 
 	// approve/deny
-	@GetMapping(value = { "pastEvents/{username}", "searchEvents/{username}"})
+	@GetMapping(value = { "pastEvents/{username}", "searchEvents/{username}" })
 	public List<Event> findAllSearch(@PathVariable String username) {
 		return es.findAll(username);
 	}
@@ -39,6 +39,7 @@ public class EventController {
 	// attending/notattending
 	@PostMapping("searchEvents")
 	public void attendEventPast(@RequestBody AttendingDTO a) {
+		System.out.println("CREDENT::   + " + a.eventid + " " + a.username + " " + a.attending);
 		es.attendEvent(a.username, a.eventid, a.attending);
 	}
 

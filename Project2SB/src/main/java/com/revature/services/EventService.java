@@ -15,7 +15,7 @@ public interface EventService {
 
 	Event createEvent(Event e);
 
-	void attendEvent(String username, int eventid, int attending);
+	Event attendEvent(String username, int eventid, int attending);
 
 	void approveEvent(int eventid, int attending);
 

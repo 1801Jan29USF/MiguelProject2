@@ -14,7 +14,7 @@ export class SearcheventComponent implements OnInit {
    Attending = {
     attending: 0,
     username: '',
-    id: 0
+    eventid: 0
   };
 
   events: Array<Event> = [];
@@ -28,13 +28,14 @@ export class SearcheventComponent implements OnInit {
 
     this.Attending.username = this.cookie.get('username');
     this.Attending.attending = attending;
-    this.Attending.id = id;
+    this.Attending.eventid = id;
+    console.log(this.Attending.username + ' ' + this.Attending.attending + ' ' + this.Attending.eventid);
     this.client.post('http://localhost:8000/events/searchEvents', this.Attending ).subscribe(
    (succ) => {
      this.ngOnInit();
    },
    (err) => {
-     alert('Failed to RSVP');
+     alert('Failed to Attend Event');
    }
     );
    }
