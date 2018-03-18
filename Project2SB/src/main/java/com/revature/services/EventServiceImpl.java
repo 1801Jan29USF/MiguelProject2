@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.Event;
+import com.revature.entities.Status;
 import com.revature.entities.User;
 import com.revature.entities.UsersEvents;
 import com.revature.repos.EventRepo;
@@ -60,14 +61,13 @@ public class EventServiceImpl implements EventService {
 				return null;
 			}
 		}
-		System.out.println("lala");
 		er.save(e);
-		System.out.println("blahh");
 		return e;
 	}
 
+	// attending
 	@Override
-	public void updateEvent(String username, int eventid, int attending) {
+	public void attendEvent(String username, int eventid, int attending) {
 		User user = ur.findByUsername(username);
 		int id = user.getId();
 		UsersEvents ue = new UsersEvents(id, eventid);
@@ -76,6 +76,17 @@ public class EventServiceImpl implements EventService {
 		Event event = er.findById(eventid);
 		event.setAttending(event.getAttending() + attending);
 		er.save(event);
+
+	}
+
+	@Override
+	public void approveEvent(int eventid, int status) {
+		Event e = er.findById(eventid);
+		System.out.println("EVENTTTT:" + e);
+		Status s = new Status();
+		s.setId(status);
+		e.setStatus(s);
+		er.save(e);
 
 	}
 }

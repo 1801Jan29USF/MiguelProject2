@@ -15,8 +15,7 @@ export class PasteventsComponent implements OnInit {
 
   Approve = {
     status: 0,
-    username: '',
-    id: 0
+    eventid: 0
   };
 
 
@@ -26,50 +25,40 @@ export class PasteventsComponent implements OnInit {
   useraddress: number;
 
 
-  constructor(private client: HttpClient, private cookie: CookieService, 
+  constructor(private client: HttpClient, private cookie: CookieService,
     private user: User, private event: Event) { }
 
-    Approval(status: number, id: number) {
+  Approval(status: number, id: number) {
 
-      this.Approve.username = this.cookie.get('username');
-      this.Approve.status = status;
-      this.Approve.id = id;
-      this.client.post('http://localhost:8000/events/searchEvents', this.Approve ).subscribe(
-     (succ) => {
-       this.ngOnInit();
-     },
-     (err) => {
-       alert('Failed to Approve');
-     }
-      );
-     }
+    this.Approve.status = status;
+    this.Approve.eventid = id;
+    this.client.post('http://localhost:8000/events/pastEvents/', this.Approve).subscribe(
+      (succ) => {
+        this.ngOnInit();
+      },
+      (err) => {
+        alert('Failed to Approve');
+      }
+    );
+  }
 
-// events that user hosted as his own house
-filterByHosted() {
-  this.filteredevents = [];
-  this.events.forEach((event, index) => {
-    if (event.host.username === this.cookie.get('username')) {
-      this.filteredevents.push(event);
-    }
-  });
-}
 
-getCurrentAddress() {
-  this.events.forEach((event, index) => {
+  getCurrentAddress() {
+    this.events.forEach((event, index) => {
 
-    if (event.host.username === this.cookie.get('username')) {
-      this.useraddress = event.location.id;
-      this.events.pop();
-      console.log(this.useraddress);
-    }
+      if (event.host.username === this.cookie.get('username')) {
+        this.useraddress = event.host.id;
+        this.events.pop();
+        console.log('Current User Address ' + this.useraddress);
+        console.log('Current User Username ' + this.cookie.get('username'));
+      }
 
-  });
-}
-
+    });
+  }
 
   ngOnInit() {
 
-    this.client.get('http://localhost:8000/events/searchEvents/' + this.cookie.get('username'))
+    this.client.get('http://localhost:8000/events/pastEvents/' + this.cookie.get('username'))
       .subscribe(
         (succ: Array<Event>) => {
           this.events = succ;
@@ -82,11 +71,22 @@ getCurrentAddress() {
         });
   }
 
+  // events that user hosted as his own house
+  filterByHosted() {
+    this.filteredevents = [];
+    this.events.forEach((event, index) => {
+      if (event.host.username === this.cookie.get('username') && event.location.id === this.useraddress) {
+        this.filteredevents.push(event);
+      }
+    });
+  }
+
 
   filterByPending() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.status.status === 'PENDING') {
+      if (event.host.username === this.cookie.get('username') && event.location.id !== this.useraddress 
+      && event.status.status === 'PENDING') {
         this.filteredevents.push(event);
       }
     });
@@ -95,7 +95,8 @@ getCurrentAddress() {
   filterByApproved() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.status.status === 'APPROVED') {
+      if (event.host.username === this.cookie.get('username') && event.location.id !== this.useraddress 
+      && event.status.status === 'APPROVED') {
         this.filteredevents.push(event);
       }
     });
@@ -104,7 +105,8 @@ getCurrentAddress() {
   filterByDenied() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.status.status === 'DENIED') {
+      if (event.status.status === 'DENIED' && event.host.username !== this.cookie.get('username') 
+      && event.location.id === this.useraddress) {
         this.filteredevents.push(event);
       }
     });
@@ -112,17 +114,7 @@ getCurrentAddress() {
   filterByRequest() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.location.id === this.useraddress && (this.cookie.get('username') !== event.host.username)) {
-        this.filteredevents.push(event);
-      }
-    });
-  }
-
-
-  filterByMyAddress() {
-    this.filteredevents = [];
-    this.events.forEach((event, index) => {
-      if (event.location ) {
+      if (event.location.id !== this.useraddress && (this.cookie.get('username') !== event.host.username)) {
         this.filteredevents.push(event);
       }
     });

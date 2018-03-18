@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.dto.ApproveDTO;
 import com.revature.dto.AttendingDTO;
 import com.revature.entities.Event;
 import com.revature.services.EventService;
@@ -23,14 +24,22 @@ public class EventController {
 	@Autowired
 	private EventService es;
 
-	@GetMapping("searchEvents/{username}")
-	public List<Event> findAll(@PathVariable String username) {
+	// approve/deny
+	@GetMapping(value = { "pastEvents/{username}", "searchEvents/{username}"})
+	public List<Event> findAllSearch(@PathVariable String username) {
 		return es.findAll(username);
 	}
 
+	// approve/deny
+	@PostMapping("pastEvents")
+	public void approveEvent(@RequestBody ApproveDTO a) {
+		es.approveEvent(a.eventid, a.status);
+	}
+
+	// attending/notattending
 	@PostMapping("searchEvents")
-	public void updateEvent(@RequestBody AttendingDTO a) {
-		es.updateEvent(a.username, a.eventid, a.attending);
+	public void attendEventPast(@RequestBody AttendingDTO a) {
+		es.attendEvent(a.username, a.eventid, a.attending);
 	}
 
 }

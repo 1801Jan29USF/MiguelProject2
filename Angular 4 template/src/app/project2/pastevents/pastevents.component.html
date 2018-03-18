@@ -1,7 +1,7 @@
 <br>
 <div class="center">
-<button class="btn btn-warning" (click)="filterByHosted()">Hosted At My House</button>
-<button class="btn btn-warning" (click)="filterByRequest()">Requested At My House</button>
+<button class="btn btn-warning" (click)="filterByHosted()">Hosted At My House By Me</button>
+<button class="btn btn-warning" (click)="filterByRequest()">Host Requests</button>
 <button class="btn btn-success" (click)="filterByApproved()">Approved</button>
 <button class="btn btn-success" (click)="filterByPending()">Pending</button>
 <button class="btn btn-danger" (click)="filterByDenied()">Denied</button>
@@ -9,7 +9,7 @@
 
 <table class="table table-striped">
   <thead>
-    <tr>
+    <tr> 
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"></th>
@@ -44,8 +44,10 @@
 
       <td>
           <form class="ui-group-buttons">
-              <button type="button" class="btn btn-primary" (click)="Approval(1, event.id)" *ngIf="event.host.id!=event.host.id">Approve</button>
-              <button type="button" class="btn btn-success" (click)="Approval(2, event.id)" *ngIf="event.host.id!=event.host.id">Denied</button>
+              <button type="button" class="btn btn-primary" (click)="Approval(1, event.id)" *ngIf = "(event.location.id !== this.useraddress)
+               && (event.status.id != 4) && (event.host.username !== this.username)">Approve</button>
+              <button type="button" class="btn btn-success" (click)="Approval(2, event.id)" *ngIf = "(event.location.id !== this.useraddress)
+               && (event.status.id != 4) && (event.host.username !== this.username)">Denied</button>
           </form>
         </td>
     </tr>

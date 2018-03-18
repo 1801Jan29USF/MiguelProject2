@@ -44,7 +44,7 @@ export class SearcheventComponent implements OnInit {
     .subscribe(
       (succ: Array<Event>) => {
         this.events = succ;
-        // this.events.pop();
+        this.events.pop();
         console.log(this.events);
       },
       (err) => {
