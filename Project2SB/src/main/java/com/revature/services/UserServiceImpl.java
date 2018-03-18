@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.revature.entities.Address;
 import com.revature.entities.Event;
 import com.revature.entities.User;
-import com.revature.entities.UsersEvents;
 import com.revature.repos.UserRepo;
 
 @Service

@@ -31,8 +31,16 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public ArrayList<Event> findAll() {
-		return er.findAll();
+	public List<Event> findAll(String username) {
+		List<Event> events = new ArrayList<Event>();
+		Event temp = new Event();
+		User hosttemp = ur.findByUsername(username);
+		temp.setLocation(hosttemp.getAddress());
+		temp.setHost(hosttemp);
+		events = er.findAll();
+		events.add(temp);
+
+		return events;
 	}
 
 	@Override
@@ -44,7 +52,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Event createEvent(Event e) {
-
+		System.out.println("MY EVENT: " + e);
 		List<Event> events = er.findAllByLocation(e.getLocation());
 		for (Event event : events) {
 			if (event.getDateandtime().equals(e.getDateandtime())
@@ -52,7 +60,9 @@ public class EventServiceImpl implements EventService {
 				return null;
 			}
 		}
+		System.out.println("lala");
 		er.save(e);
+		System.out.println("blahh");
 		return e;
 	}
 

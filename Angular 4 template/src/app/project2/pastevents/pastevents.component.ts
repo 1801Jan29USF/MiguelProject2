@@ -23,7 +23,7 @@ export class PasteventsComponent implements OnInit {
   filteredevents: Array<Event> = [];
   events: Array<Event> = [];
   username: string;
-
+  useraddress: number;
 
 
   constructor(private client: HttpClient, private cookie: CookieService, 
@@ -44,9 +44,8 @@ export class PasteventsComponent implements OnInit {
       );
      }
 
-
- //events that user hosted as his own house
- filterByHosted() {
+// events that user hosted as his own house
+filterByHosted() {
   this.filteredevents = [];
   this.events.forEach((event, index) => {
     if (event.host.username === this.cookie.get('username')) {
@@ -55,13 +54,27 @@ export class PasteventsComponent implements OnInit {
   });
 }
 
+getCurrentAddress() {
+  this.events.forEach((event, index) => {
+
+    if (event.host.username === this.cookie.get('username')) {
+      this.useraddress = event.location.id;
+      this.events.pop();
+      console.log(this.useraddress);
+    }
+
+  });
+}
+
+
   ngOnInit() {
-    this.client.get('http://localhost:8000/events/searchEvents')
+
+    this.client.get('http://localhost:8000/events/searchEvents/' + this.cookie.get('username'))
       .subscribe(
         (succ: Array<Event>) => {
           this.events = succ;
           console.log(this.events);
-          // console.log(this.currentuser.getAddress);
+          this.getCurrentAddress();
           this.filterByHosted();
         },
         (err) => {
@@ -96,6 +109,15 @@ export class PasteventsComponent implements OnInit {
       }
     });
   }
+  filterByRequest() {
+    this.filteredevents = [];
+    this.events.forEach((event, index) => {
+      if (event.location.id === this.useraddress && (this.cookie.get('username') !== event.host.username)) {
+        this.filteredevents.push(event);
+      }
+    });
+  }
+
 
   filterByMyAddress() {
     this.filteredevents = [];

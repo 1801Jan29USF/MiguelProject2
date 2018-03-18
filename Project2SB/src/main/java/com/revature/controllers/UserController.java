@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.entities.Address;
 import com.revature.entities.Event;
 import com.revature.entities.User;
-import com.revature.entities.UsersEvents;
 import com.revature.services.EventService;
 import com.revature.services.UserService;
 
@@ -62,12 +61,12 @@ public class UserController {
 		return us.save(u);
 	}
 
-	@GetMapping(value = "/Profile/{username}")
+	@GetMapping("/Profile/{username}")
 	public User getProfileInfo(@PathVariable String username) {
 		return us.findByUsername(username);
 	}
 
-	@GetMapping(value = "/CreateEvent")
+	@GetMapping("/CreateEvent")
 	public List<User> getAllUsers() {
 		return us.findAll();
 	}

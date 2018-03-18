@@ -40,10 +40,11 @@ export class SearcheventComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.client.get('http://localhost:8000/events/searchEvents')
+    this.client.get('http://localhost:8000/events/searchEvents/' + this.cookie.get('username'))
     .subscribe(
       (succ: Array<Event>) => {
         this.events = succ;
+        // this.events.pop();
         console.log(this.events);
       },
       (err) => {

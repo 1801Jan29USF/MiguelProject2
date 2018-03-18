@@ -51,7 +51,6 @@ export class CreateeventComponent implements OnInit {
       .subscribe(
         (succ: Array<User>) => {
           this.users = succ;
-          console.log(this.users);
         },
         (err) => {
           console.log('failed to load events');
@@ -66,11 +65,14 @@ export class CreateeventComponent implements OnInit {
 
     this.users.forEach((user, index) => {
       if (user.username === this.host) {
+        console.log("USER");
+        console.log(user);
         // tslint:disable-next-line:no-unused-expression
         this.newEvent.host.id = user.id;
         this.newEvent.location.id = user.address.id;
       }
     });
+    console.log('NEWEVENT');
     console.log(this.newEvent);
     this.client.post('http://localhost:8000/User/CreateEvent', this.newEvent)
       .subscribe(
