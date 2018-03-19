@@ -29,7 +29,9 @@ export class Project2loginComponent implements OnInit {
         data => {
           this.user = <User>data;
           this.cookie.set('username', this.credential.username);
+          this.cookie.set('role', this.user.role.role);
           alert(this.credential.username + ' logged in');
+          console.log('this is my role status ' + this.cookie.get('role'));
             this.router.navigateByUrl('/pastevents');
         },
         err => {

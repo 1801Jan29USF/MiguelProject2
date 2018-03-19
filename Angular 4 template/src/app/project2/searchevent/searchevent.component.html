@@ -1,5 +1,11 @@
-<div class="center">
 
+<div class="center">
+    <div class="signout">
+        <button type="button" class="btn btn-outline-secondary" triggers="mouseenter:mouseleave" popoverTitle="Pop title" routerLink="/project2login">
+         Sign out
+       </button>
+       </div>
+       
   <input type="text" name="type-filter" [(ngModel)]="typeFilter" placeholder="Enter Event Type">
   <input type="text" name="city-filter" [(ngModel)]="cityFilter" placeholder="Enter City ">
 
@@ -17,8 +23,6 @@
   <!-- <select name="location">
         <option *ngFor="let event of events" [ngValue]="event.address.city">{{event.address.city}}</option>
       </select> -->
-
-</div>
 
 
 <table class="table table-striped">
@@ -88,3 +92,4 @@
     </tr>
   </tbody>
 </table>
+</div>

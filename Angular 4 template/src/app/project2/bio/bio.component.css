@@ -1,0 +1,6 @@
+.container {
+    padding-top: .5%;
+	box-shadow: 10px 10px 5px black;
+	background-color: lightgray;
+	opacity: 1.2;
+}

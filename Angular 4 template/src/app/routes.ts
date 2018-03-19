@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { HomepageComponent } from './project2/homepage/homepage.component';
-import { DashboardComponent } from './Project2/dashboard/dashboard.component';
 import { CreateeventComponent } from './Project2/createevent/createevent.component';
 import { BioComponent } from './Project2/bio/bio.component';
 import { PasteventsComponent } from './Project2/pastevents/pastevents.component';
@@ -8,6 +6,7 @@ import { SearcheventComponent } from './Project2/searchevent/searchevent.compone
 import { Project2registerComponent } from './Project2/project2register/project2register.component';
 import { Project2loginComponent } from './Project2/project2login/project2login.component';
 import { HostGuard } from './guard/host.guard';
+import { AttendeeGuard } from './guard/attendee.guard';
 
 export const appRoutes: Routes = [
   {
@@ -19,32 +18,39 @@ export const appRoutes: Routes = [
     component: Project2loginComponent
   },
   {
-    path: 'homepage',
-    component: HomepageComponent
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  },
-  {
     path: 'createevent',
-    component: CreateeventComponent
+    component: CreateeventComponent,
+    canActivate: [
+      HostGuard
+    ]
   },
   {
     path: 'bio',
-    component: BioComponent
+    component: BioComponent,
+    canActivate: [
+      AttendeeGuard,
+      HostGuard
+    ]
   },
   {
     path: 'pastevents',
-    component: PasteventsComponent
+    component: PasteventsComponent,
+    canActivate: [
+      AttendeeGuard,
+      HostGuard
+    ]
   },
   {
     path: 'searchevent',
-    component: SearcheventComponent
+    component: SearcheventComponent,
+    canActivate: [
+      AttendeeGuard,
+      HostGuard
+    ]
   },
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'homepage'
+    redirectTo: 'project2login'
   }
 ];

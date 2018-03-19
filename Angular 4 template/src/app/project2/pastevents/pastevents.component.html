@@ -1,4 +1,12 @@
-<br>
+
+<div class="container">
+    <div class="signout">
+        <button type="button" class="btn btn-outline-secondary" triggers="mouseenter:mouseleave" popoverTitle="Pop title" routerLink="/project2login">
+         Sign out
+       </button>
+       </div>
+       
+  <br>
 <div class="center">
 <button class="btn btn-warning" (click)="filterByHosted()" *ngIf="this.role == 1">Hosted At My House By Me</button>
 <button class="btn btn-warning" (click)="filterByRequest()" *ngIf="this.role == 1">Host Requests</button>
@@ -7,6 +15,7 @@
 <button class="btn btn-danger" (click)="filterByDenied()" *ngIf="this.role == 1">Denied</button>
 <button class="btn btn-danger" (click)="filterByAttended()">Events Attended</button>
 </div>
+
 
 <table class="table table-striped">
   <thead>
@@ -54,3 +63,4 @@
     </tr>
   </tbody>
 </table>
+</div>

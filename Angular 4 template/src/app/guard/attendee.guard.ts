@@ -10,11 +10,10 @@ export class AttendeeGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.Cookie.get('attendee')) {
+    if (this.Cookie.get('role') === 'ATTENDEE') {
       return true;
     } else {
-      this.Cookie.get('attendee');
-      this.router.navigateByUrl('/dashboard');
+      this.Cookie.get('role');
     }
   }
 }

@@ -83,7 +83,7 @@ export class CreateeventComponent implements OnInit {
         data => {
           this.event = <Event>data;
           alert('Event registered!');
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/pastevents');
         },
         err => {
           alert('failed to submit event');
