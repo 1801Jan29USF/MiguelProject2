@@ -23,6 +23,7 @@ export class PasteventsComponent implements OnInit {
   events: Array<Event> = [];
   username: string;
   useraddress: number;
+  role: number;
 
 
   constructor(private client: HttpClient, private cookie: CookieService,
@@ -52,6 +53,8 @@ export class PasteventsComponent implements OnInit {
       console.log('who am i ' + event.host.username);
       if (event.host.username === this.cookie.get('username')) {
         this.useraddress = event.location.id;
+        this.role = event.host.role.id;
+        console.log('Current User Role' + this.role);
         console.log('Current User Address ' + this.useraddress);
         console.log('Current User Username ' + this.cookie.get('username'));
       }
@@ -66,7 +69,7 @@ export class PasteventsComponent implements OnInit {
           this.events = succ;
           this.getCurrentAddress();
           this.events.pop();
-          this.filterByHosted();
+          this.filterByAttended();
         },
         (err) => {
           console.log('failed to load events');
@@ -87,8 +90,8 @@ export class PasteventsComponent implements OnInit {
   filterByPending() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.host.username === this.cookie.get('username') && event.location.id !== this.useraddress 
-      && event.status.status === 'PENDING') {
+      if (event.host.username === this.cookie.get('username') && event.location.id !== this.useraddress
+        && event.status.status === 'PENDING') {
         this.filteredevents.push(event);
       }
     });
@@ -97,8 +100,8 @@ export class PasteventsComponent implements OnInit {
   filterByApproved() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.host.username === this.cookie.get('username') && event.location.id !== this.useraddress 
-      && event.status.status === 'APPROVED') {
+      if (event.host.username === this.cookie.get('username') && event.location.id !== this.useraddress
+        && event.status.status === 'APPROVED') {
         this.filteredevents.push(event);
       }
     });
@@ -107,8 +110,8 @@ export class PasteventsComponent implements OnInit {
   filterByDenied() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.status.status === 'DENIED' && event.location.id !== this.useraddress 
-     && event.host.username === this.cookie.get('username') 
+      if (event.status.status === 'DENIED' && event.location.id !== this.useraddress
+        && event.host.username === this.cookie.get('username')
       ) {
         this.filteredevents.push(event);
       }
@@ -122,4 +125,28 @@ export class PasteventsComponent implements OnInit {
       }
     });
   }
+
+
+  filterByAttended() {
+    this.filteredevents = [];
+    this.events.forEach((event, index) => {
+      console.log(event);
+      if (event.userevents !== undefined || event.userevents.length !== 0) {
+        console.log('miguel');
+        console.log(event);
+        event.userevents.forEach((user, index2) => {
+          if (user.username === this.cookie.get('username')) {
+            this.filteredevents.push(event);
+          }
+        });
+
+
+      }
+
+    });
+
+  }
+
+
+
 }

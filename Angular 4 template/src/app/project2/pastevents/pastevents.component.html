@@ -1,10 +1,11 @@
 <br>
 <div class="center">
-<button class="btn btn-warning" (click)="filterByHosted()">Hosted At My House By Me</button>
-<button class="btn btn-warning" (click)="filterByRequest()">Host Requests</button>
-<button class="btn btn-success" (click)="filterByApproved()">Approved</button>
-<button class="btn btn-success" (click)="filterByPending()">Pending</button>
-<button class="btn btn-danger" (click)="filterByDenied()">Denied</button>
+<button class="btn btn-warning" (click)="filterByHosted()" *ngIf="this.role == 1">Hosted At My House By Me</button>
+<button class="btn btn-warning" (click)="filterByRequest()" *ngIf="this.role == 1">Host Requests</button>
+<button class="btn btn-success" (click)="filterByApproved()" *ngIf="this.role == 1">Approved</button>
+<button class="btn btn-success" (click)="filterByPending()" *ngIf="this.role == 1">Pending</button>
+<button class="btn btn-danger" (click)="filterByDenied()" *ngIf="this.role == 1">Denied</button>
+<button class="btn btn-danger" (click)="filterByAttended()">Events Attended</button>
 </div>
 
 <table class="table table-striped">

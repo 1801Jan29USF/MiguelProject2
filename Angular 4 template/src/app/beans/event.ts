@@ -31,6 +31,9 @@ export class Event {
     host: {
         id: 0
         username: string;
+        role: {
+            id: number;
+        }
     };
 }
 
