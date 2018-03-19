@@ -11,11 +11,11 @@ export class HostGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.Cookie.get('host')) {
+    if (this.Cookie.get('role') === 'HOST') {
       return true;
     } else {
-      this.Cookie.get('host');
-      this.router.navigateByUrl('/pastevents');
+      this.Cookie.get('role');
+      this.router.navigateByUrl('/createevents');
     }
   }
 }

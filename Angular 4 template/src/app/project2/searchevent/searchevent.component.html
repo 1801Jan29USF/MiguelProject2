@@ -1,72 +1,95 @@
 
 <div class="center">
-  <label for="type-filter"></label>
-  <input type="text" name="power-filter" [(ngModel)]="typeFilter"  placeholder="Enter Event Type">
-  <label for="genre-filter"></label>
-  <input type="text" name="genre-filter" [(ngModel)]="genreFilter"  placeholder="Enter Genre Type">
+    <div class="signout">
+        <button type="button" class="btn btn-outline-secondary" triggers="mouseenter:mouseleave" popoverTitle="Pop title" routerLink="/project2login">
+         Sign out
+       </button>
+       </div>
+       
+  <input type="text" name="type-filter" [(ngModel)]="typeFilter" placeholder="Enter Event Type">
+  <input type="text" name="city-filter" [(ngModel)]="cityFilter" placeholder="Enter City ">
 
 
 
 
 
 
-
-
- <!-- <select name="type">
+  <!-- <select name="type">
     <option *ngFor="let event of events" [ngValue]="event.type.type">{{event.type.type}}</option>
   </select>
   <select name="genre">
       <option *ngFor="let event of events" [ngValue]="event.genre.genre">{{event.genre.genre}}</option>
     </select> -->
-    <!-- <select name="location">
+  <!-- <select name="location">
         <option *ngFor="let event of events" [ngValue]="event.address.city">{{event.address.city}}</option>
       </select> -->
-      
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">Event Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date and Time</th>
+      <th scope="col">City</th>
+      <th scope="col">Capacity</th>
+      <th scope="col">Cell #</th>
+      <th scope="col">Type</th>
+      <th scope="col">Genre</th>
+
+
+
+
+    </tr>
+  </thead>
+
+  <!-- ngIf to replate the null for unresolved status and the status or type -->
+  <tbody>
+    <tr *ngFor="let event of (filteredevents | searchpipe: typeFilter | location: cityFilter)">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <th scope="row">{{event.eventname}}</th>
+      <td>{{event.description}}</td>
+      <td>{{event.dateandtime}}</td>
+      <td>{{event.location.city}}</td>
+      <td>{{event.capacity}}</td>
+      <td>{{event.phonenumber}}</td>
+      <td>{{event.type.type}}</td>
+      <td>{{event.genre.genre}} </td>
+      <!-- <td*ngIf = "event.genre.genre!= null else nogenre">{{event.genre.genre}}</td>
+            <ng-template #nogenre>
+               d
+            </ng-template> -->
+
+      <td>
+        <form class="ui-group-buttons">
+
+          <ng-container *ngIf="event.userevents == undefined || event.userevents.length === 0">
+            <button type="button" class="btn btn-primary" (click)="Approved(1, event.id)" *ngIf="event.capacity !== event.attending">Attending</button>
+          </ng-container>
+
+          <ng-container *ngFor="let user of event.userevents">
+
+            <ng-container *ngIf="event.userevents !== undefined">
+
+              <button type="button" class="btn btn-primary" (click)="Approved(1, event.id)" *ngIf="this.cookie.get('username') !== user.username && event.capacity !== event.attending">Attending</button>
+              <button type="button" class="btn btn-success" (click)="Approved(0, event.id)" *ngIf = "event.capacity !== event.attending">Not Attending</button>
+
+
+
+            </ng-container>
+
+          </ng-container>
+
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>
-
-
-  <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col"></th>          
-          <th scope="col"></th>          
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col">Event Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Date and Time</th>
-          <th scope="col">Capacity</th>
-          <th scope="col">Cell #</th>
-          <th scope="col">Type</th>
-          <th scope="col">Genre</th>
-          
-          
-    
-    
-        </tr>
-      </thead>
-    
-      <!-- ngIf to replate the null for unresolved status and the status or type -->
-      <tbody>
-        <tr *ngFor="let event of events | searchpipe:typeFilter:genreFilter">
-            <td></td>             
-            <td></td> 
-            <td></td>
-            <td></td>
-            <th scope="row">{{event.eventname}}</th>
-            <td>{{event.description}}</td>
-            <td>{{event.dateandtime}}</td>
-            <td>{{event.capacity}}</td>
-            <td>{{event.phonenumber}}</td>
-            <td>{{event.type.type}}</td>
-            <td>{{event.genre.genre}}</td>
-
-            <td>
-                <form class="ui-group-buttons">
-                    <button type="button" class="btn btn-primary" (click)="Approved(1,Attending.attending)">Attending</button>
-                    <button type="button" class="btn btn-success" (click)="Approved(0, Attending.attending)">Not Attending</button>
-                </form>
-              </td>
-        </tr>
-      </tbody>
-    </table>

@@ -13,7 +13,7 @@ export class BioComponent implements OnInit {
 
 
 
-  constructor(private client: HttpClient, private cookie: CookieService, private user: User) { }
+  constructor(private client: HttpClient, private cookie: CookieService, public user: User) { }
 
  
 

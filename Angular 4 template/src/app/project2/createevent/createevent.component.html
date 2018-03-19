@@ -6,7 +6,7 @@
     <div class="create">
       <input type="text" name="e" [(ngModel)]="newEvent.eventname" placeholder="Event Name" required="required" />
       <input type="text" name="d" [(ngModel)]="newEvent.description" placeholder="Event Description" required="required" />
-      <input type="text" name="l" [(ngModel)]="newEvent.dateandtime" placeholder="Event Location" required="required" />
+      <input type="text" name="l" [(ngModel)]="newEvent.dateandtime" placeholder="Event Date And Time" required="required" />
       <input type="number" name="c" [(ngModel)]="newEvent.capacity" placeholder="Capacity amount" required="required" />
       <input type="text" name="cell" [(ngModel)]="newEvent.phonenumber" placeholder="Contact cell" required="required" />
       <label> Type </label>
@@ -40,7 +40,7 @@
       <br>
       <label> Host</label>
       <select name="type" [(ngModel)]="host">
-        <option *ngFor="let user of users" [ngValue]="user.username">{{user.username}}</option>
+        <option *ngFor="let user of users" [ngValue]="user.username" >{{user.username}}</option>
       </select>
 
       <button type="submit" class="btn btn-primary btn-block btn-large">Submit Event </button>

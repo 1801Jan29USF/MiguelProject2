@@ -7,7 +7,14 @@ export class Event {
     dateandtime: string;
     capacity: number;
     phonenumber: string;
-    location: number;
+    attending: number;
+    location: {
+        id: 0
+        street: string;
+        city: string;
+        state: string;
+        zipcode: string;
+    };
     status: {
         id: 0
         status: string;
@@ -20,9 +27,13 @@ export class Event {
         id: 0
         genre: string;
     };
+    userevents: Array<User>;
     host: {
         id: 0
         username: string;
+        role: {
+            id: number;
+        }
     };
 }
 

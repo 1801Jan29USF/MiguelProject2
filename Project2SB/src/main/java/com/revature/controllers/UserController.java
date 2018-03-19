@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.entities.Address;
 import com.revature.entities.Event;
 import com.revature.entities.User;
-import com.revature.entities.UsersEvents;
 import com.revature.services.EventService;
 import com.revature.services.UserService;
 
@@ -33,8 +32,6 @@ public class UserController {
 
 	@PostMapping("/CreateEvent")
 	public Event createEvent(@RequestBody Event e) {
-		System.out.println("NEW EVENT::::::" + e);
-
 		return es.createEvent(e);
 	}
 
@@ -51,11 +48,11 @@ public class UserController {
 		return us.findAllByAddress(loc);
 	}
 
-	// all events that a user has attended
-	@GetMapping("/AttendedEvents/{username}")
-	public Set<Event> attendedEvents(@PathVariable String username) {
-		return us.findAll(username);
-	}
+//	// all events that a user has attended
+//	@GetMapping("/AttendedEvents/{username}")
+//	public Set<Event> attendedEvents(@PathVariable String username) {
+//		return us.findAll(username);
+//	}
 
 	@PostMapping("/UpdateProfile/{username}")
 	public User updateProfile(@RequestBody User u, @PathVariable String username) {
@@ -64,12 +61,12 @@ public class UserController {
 		return us.save(u);
 	}
 
-	@GetMapping(value = "/Profile/{username}")
+	@GetMapping("/Profile/{username}")
 	public User getProfileInfo(@PathVariable String username) {
 		return us.findByUsername(username);
 	}
 
-	@GetMapping(value = "/CreateEvent")
+	@GetMapping("/CreateEvent")
 	public List<User> getAllUsers() {
 		return us.findAll();
 	}

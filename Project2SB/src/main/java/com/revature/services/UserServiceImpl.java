@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.revature.entities.Address;
 import com.revature.entities.Event;
 import com.revature.entities.User;
-import com.revature.entities.UsersEvents;
 import com.revature.repos.UserRepo;
 
 @Service
@@ -40,10 +39,10 @@ public class UserServiceImpl implements UserService {
 		return ur.findByUsername(username);
 	}
 
-	@Override
-	public Set<Event> findAll(String username) {
-		return ur.findByUsername(username).getUserevents();
-	}
+//	@Override
+//	public Set<Event> findAll(String username) {
+//		return ur.findByUsername(username).getUserevents();
+//	}
 
 	@Override
 	public List<User> findAll() {

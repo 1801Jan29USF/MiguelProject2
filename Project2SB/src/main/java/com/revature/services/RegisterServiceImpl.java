@@ -20,7 +20,6 @@ public class RegisterServiceImpl implements RegisterService {
 		if (rr.findByUsername(u.getUsername()) != null) {
 			return null;
 		}
-
 		rr.save(u);
 		return u;
 	}

@@ -13,42 +13,85 @@ import { User } from '../../beans/user';
 })
 export class PasteventsComponent implements OnInit {
 
+  Approve = {
+    status: 0,
+    eventid: 0
+  };
+
 
   filteredevents: Array<Event> = [];
   events: Array<Event> = [];
   username: string;
+  useraddress: number;
+  role: number;
 
-  constructor(private client: HttpClient, private cookie: CookieService, 
+
+  constructor(private client: HttpClient, private cookie: CookieService,
     private user: User, private event: Event) { }
- //events that user hosted as his own house
- filterByHosted() {
-  this.filteredevents = [];
-  this.events.forEach((event, index) => {
-    if (event.host.username === this.cookie.get('username')) {
-      this.filteredevents.push(event);
-    }
-  });
-}
+
+  Approval(status: number, id: number) {
+
+    this.Approve.status = status;
+    this.Approve.eventid = id;
+    this.client.post('http://localhost:8000/events/pastEvents/', this.Approve).subscribe(
+      (succ) => {
+        alert('Event has been approved');
+        this.ngOnInit();
+      },
+      (err) => {
+        alert('Event has been denied');
+        this.ngOnInit();
+      }
+    );
+  }
+
+
+  getCurrentAddress() {
+    this.events.forEach((event, index) => {
+      console.log('ALL EVENTS:::: ');
+      console.log(this.events);
+      console.log('who am i ' + event.host.username);
+      if (event.host.username === this.cookie.get('username')) {
+        this.useraddress = event.location.id;
+        this.role = event.host.role.id;
+        console.log('Current User Role' + this.role);
+        console.log('Current User Address ' + this.useraddress);
+        console.log('Current User Username ' + this.cookie.get('username'));
+      }
+
+    });
+  }
 
   ngOnInit() {
-    this.client.get('http://localhost:8000/events/searchEvents')
+    this.client.get('http://localhost:8000/events/pastEvents/' + this.cookie.get('username'))
       .subscribe(
         (succ: Array<Event>) => {
           this.events = succ;
-          console.log(this.events);
-          // console.log(this.currentuser.getAddress);
-          this.filterByHosted();
+          this.getCurrentAddress();
+          this.events.pop();
+          this.filterByAttended();
         },
         (err) => {
           console.log('failed to load events');
         });
   }
 
+  // events that user hosted as his own house
+  filterByHosted() {
+    this.filteredevents = [];
+    this.events.forEach((event, index) => {
+      if (event.host.username === this.cookie.get('username') && event.location.id === this.useraddress) {
+        this.filteredevents.push(event);
+      }
+    });
+  }
+
 
   filterByPending() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.status.status === 'PENDING') {
+      if (event.host.username === this.cookie.get('username') && event.location.id !== this.useraddress
+        && event.status.status === 'PENDING') {
         this.filteredevents.push(event);
       }
     });
@@ -57,7 +100,8 @@ export class PasteventsComponent implements OnInit {
   filterByApproved() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.status.status === 'APPROVED') {
+      if (event.host.username === this.cookie.get('username') && event.location.id !== this.useraddress
+        && event.status.status === 'APPROVED') {
         this.filteredevents.push(event);
       }
     });
@@ -66,18 +110,43 @@ export class PasteventsComponent implements OnInit {
   filterByDenied() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.status.status === 'DENIED') {
+      if (event.status.status === 'DENIED' && event.location.id !== this.useraddress
+        && event.host.username === this.cookie.get('username')
+      ) {
         this.filteredevents.push(event);
       }
     });
   }
-  
-  filterByMyAddress() {
+  filterByRequest() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.location ) {
+      if (event.location.id === this.useraddress && (this.cookie.get('username') !== event.host.username)) {
         this.filteredevents.push(event);
       }
     });
   }
+
+
+  filterByAttended() {
+    this.filteredevents = [];
+    this.events.forEach((event, index) => {
+      console.log(event);
+      if (event.userevents !== undefined || event.userevents.length !== 0) {
+        console.log('miguel');
+        console.log(event);
+        event.userevents.forEach((user, index2) => {
+          if (user.username === this.cookie.get('username')) {
+            this.filteredevents.push(event);
+          }
+        });
+
+
+      }
+
+    });
+
+  }
+
+
+
 }

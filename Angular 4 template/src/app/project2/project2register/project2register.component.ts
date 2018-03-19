@@ -21,7 +21,7 @@ export class Project2registerComponent implements OnInit {
     bio: '',
     phonenumber: '',
     role: {
-      id: 2
+      id: 0
     },
     address: {
       id: 0,
@@ -46,7 +46,6 @@ register() {
       this.user = <User>data;
       alert(this.newUser.username + ' registered! ');
         this.router.navigateByUrl('/pastevents');
-    
     },
     err => {
       alert('failed to register');

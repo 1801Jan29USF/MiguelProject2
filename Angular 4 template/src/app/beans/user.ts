@@ -2,7 +2,7 @@ export class User {
     username: string;
     role: {
         id: number;
-        role: String;
+        role: string;
     };
     id: number;
     firstname: string;
