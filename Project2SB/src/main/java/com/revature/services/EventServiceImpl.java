@@ -89,7 +89,7 @@ public class EventServiceImpl implements EventService {
 			uer.delete(ue);
 			event.setAttending(event.getAttending() - 1);
 			er.save(event);
-			return event;
+			return null;
 		}
 		uer.save(ue);
 		event.setAttending(event.getAttending() + attending);
@@ -97,12 +97,17 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public void approveEvent(int eventid, int status) {
+	public Event approveEvent(int eventid, int status) {
 		Event e = er.findById(eventid);
 		Status s = new Status();
 		s.setId(status);
 		e.setStatus(s);
-		er.save(e);
+		if (status == 2) {
+			er.save(e);
+			return null;
+		}
+		System.out.println(" HERE I AM " + e);
+		return er.save(e);
 
 	}
 }

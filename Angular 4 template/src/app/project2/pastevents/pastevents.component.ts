@@ -34,10 +34,12 @@ export class PasteventsComponent implements OnInit {
     this.Approve.eventid = id;
     this.client.post('http://localhost:8000/events/pastEvents/', this.Approve).subscribe(
       (succ) => {
+        alert('Event has been approved');
         this.ngOnInit();
       },
       (err) => {
-        alert('Failed to Approve');
+        alert('Event has been denied');
+        this.ngOnInit();
       }
     );
   }
@@ -105,8 +107,9 @@ export class PasteventsComponent implements OnInit {
   filterByDenied() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if (event.status.status === 'DENIED' && event.host.username !== this.cookie.get('username') 
-      && event.location.id === this.useraddress) {
+      if (event.status.status === 'DENIED' && event.location.id !== this.useraddress 
+     && event.host.username === this.cookie.get('username') 
+      ) {
         this.filteredevents.push(event);
       }
     });

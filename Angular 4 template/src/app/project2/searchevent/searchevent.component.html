@@ -67,15 +67,15 @@
         <form class="ui-group-buttons">
 
           <ng-container *ngIf="event.userevents == undefined || event.userevents.length === 0">
-            <button type="button" class="btn btn-primary" (click)="Approved(1, event.id)">Attending</button>
+            <button type="button" class="btn btn-primary" (click)="Approved(1, event.id)" *ngIf="event.capacity !== event.attending">Attending</button>
           </ng-container>
 
           <ng-container *ngFor="let user of event.userevents">
 
             <ng-container *ngIf="event.userevents !== undefined">
 
-              <button type="button" class="btn btn-primary" (click)="Approved(1, event.id)" *ngIf="this.cookie.get('username') !== user.username">Attending</button>
-              <button type="button" class="btn btn-success" (click)="Approved(0, event.id)">Not Attending</button>
+              <button type="button" class="btn btn-primary" (click)="Approved(1, event.id)" *ngIf="this.cookie.get('username') !== user.username && event.capacity !== event.attending">Attending</button>
+              <button type="button" class="btn btn-success" (click)="Approved(0, event.id)" *ngIf = "event.capacity !== event.attending">Not Attending</button>
 
 
 

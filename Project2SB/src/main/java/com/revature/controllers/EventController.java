@@ -32,15 +32,15 @@ public class EventController {
 
 	// approve/deny
 	@PostMapping("pastEvents")
-	public void approveEvent(@RequestBody ApproveDTO a) {
-		es.approveEvent(a.eventid, a.status);
+	public Event approveEvent(@RequestBody ApproveDTO a) {
+		return es.approveEvent(a.eventid, a.status);
 	}
 
 	// attending/notattending
 	@PostMapping("searchEvents")
-	public void attendEventPast(@RequestBody AttendingDTO a) {
+	public Event attendEventPast(@RequestBody AttendingDTO a) {
 		System.out.println("CREDENT::   + " + a.eventid + " " + a.username + " " + a.attending);
-		es.attendEvent(a.username, a.eventid, a.attending);
+		return es.attendEvent(a.username, a.eventid, a.attending);
 	}
 
 }

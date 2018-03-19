@@ -64,10 +64,12 @@ export class SearcheventComponent implements OnInit {
     console.log(this.Attending.username + ' ' + this.Attending.attending + ' ' + this.Attending.eventid);
     this.client.post('http://localhost:8000/events/searchEvents', this.Attending).subscribe(
       (succ) => {
+        alert('Your spot has been Reserved!');
         this.ngOnInit();
       },
       (err) => {
-        alert('Failed to Attend Event');
+        alert('Your RSVP has been cancelled');
+        this.ngOnInit();
 
       }
     );
