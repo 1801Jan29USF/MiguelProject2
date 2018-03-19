@@ -1,7 +1,9 @@
 package com.revature.entities;
 
 import java.io.File;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -62,6 +66,10 @@ public class Event {
 	@Column(name = "attending")
 	private int attending;
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "users_event", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<User> userevents;
+
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -90,7 +98,7 @@ public class Event {
 		return "Event [id=" + id + ", eventname=" + eventname + ", description=" + description + ", location="
 				+ location + ", dateandtime=" + dateandtime + ", capacity=" + capacity + ", phonenumber=" + phonenumber
 				+ ", attachment=" + attachment + ", type=" + type + ", status=" + status + ", genre=" + genre
-				+ ", host=" + host + ", attending=" + attending + "]";
+				+ ", host=" + host + ", attending=" + attending + ", userevents=" + userevents + "]";
 	}
 
 	@Override
@@ -110,6 +118,7 @@ public class Event {
 		result = prime * result + ((phonenumber == null) ? 0 : phonenumber.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((userevents == null) ? 0 : userevents.hashCode());
 		return result;
 	}
 
@@ -177,6 +186,11 @@ public class Event {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
+			return false;
+		if (userevents == null) {
+			if (other.userevents != null)
+				return false;
+		} else if (!userevents.equals(other.userevents))
 			return false;
 		return true;
 	}
@@ -283,6 +297,14 @@ public class Event {
 
 	public void setAttending(int attending) {
 		this.attending = attending;
+	}
+
+	public Set<User> getUserevents() {
+		return userevents;
+	}
+
+	public void setUserevents(Set<User> userevents) {
+		this.userevents = userevents;
 	}
 
 }

@@ -36,27 +36,25 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> findAll(String username) {
 		List<Event> events = new ArrayList<Event>();
-			
+
 		Type typetemp = new Type(1, "fake");
-		
+
 		Status statustemp = new Status(1, "fake");
-		
-		Genre genretemp = new Genre(1,"fake");
-		
+
+		Genre genretemp = new Genre(1, "fake");
+
 		User currentUser = ur.findByUsername(username);
-		
-		
-				
-		Event temp = new Event(1, "fake", "fake", null, "fake", 0, "fake", null, typetemp, statustemp, genretemp, null, 0);
-				
+
+		Event temp = new Event(1, "fake", "fake", null, "fake", 0, "fake", null, typetemp, statustemp, genretemp, null,
+				0);
+
 		events = er.findAll();
-	
 
 		temp.setLocation(currentUser.getAddress());
 		temp.setHost(currentUser);
 		temp.setId(1);
 		events.add(temp);
-		System.out.println("TRICKY EVENTS: " + events);
+
 		return events;
 	}
 
@@ -86,11 +84,16 @@ public class EventServiceImpl implements EventService {
 		User user = ur.findByUsername(username);
 		int id = user.getId();
 		UsersEvents ue = new UsersEvents(id, eventid);
-		uer.save(ue);
 		Event event = er.findById(eventid);
+		if (attending == 0) {
+			uer.delete(ue);
+			event.setAttending(event.getAttending() - 1);
+			er.save(event);
+			return event;
+		}
+		uer.save(ue);
 		event.setAttending(event.getAttending() + attending);
 		return er.save(event);
-
 	}
 
 	@Override

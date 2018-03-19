@@ -27,6 +27,7 @@ export class Event {
         id: 0
         genre: string;
     };
+    userevents: Array<User>;
     host: {
         id: 0
         username: string;

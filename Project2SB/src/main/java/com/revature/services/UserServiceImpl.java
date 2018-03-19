@@ -39,10 +39,10 @@ public class UserServiceImpl implements UserService {
 		return ur.findByUsername(username);
 	}
 
-	@Override
-	public Set<Event> findAll(String username) {
-		return ur.findByUsername(username).getUserevents();
-	}
+//	@Override
+//	public Set<Event> findAll(String username) {
+//		return ur.findByUsername(username).getUserevents();
+//	}
 
 	@Override
 	public List<User> findAll() {

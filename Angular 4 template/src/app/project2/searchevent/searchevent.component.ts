@@ -9,6 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './searchevent.component.html',
   styleUrls: ['./searchevent.component.css']
 })
+
 export class SearcheventComponent implements OnInit {
 
   Attending = {
@@ -25,21 +26,8 @@ export class SearcheventComponent implements OnInit {
 
   constructor(private client: HttpClient, private router: Router, private event: Event, private cookie: CookieService) { }
 
-  Approved(attending: number, id: number) {
 
-    this.Attending.username = this.cookie.get('username');
-    this.Attending.attending = attending;
-    this.Attending.eventid = id;
-    console.log(this.Attending.username + ' ' + this.Attending.attending + ' ' + this.Attending.eventid);
-    this.client.post('http://localhost:8000/events/searchEvents', this.Attending).subscribe(
-      (succ) => {
-        this.ngOnInit();
-      },
-      (err) => {
-        alert('Failed to Attend Event');
-      }
-    );
-  }
+
   getCurrentAddress() {
     this.events.forEach((event, index) => {
       console.log('ALL EVENTS:::: ');
@@ -62,18 +50,34 @@ export class SearcheventComponent implements OnInit {
           this.getCurrentAddress();
           this.events.pop();
           this.filterByHouse();
-          console.log(this.events);
+
         },
         (err) => {
           console.log('failed to load events');
         });
   }
+
+  Approved(attending: number, id: number) {
+    this.Attending.username = this.cookie.get('username');
+    this.Attending.attending = attending;
+    this.Attending.eventid = id;
+    console.log(this.Attending.username + ' ' + this.Attending.attending + ' ' + this.Attending.eventid);
+    this.client.post('http://localhost:8000/events/searchEvents', this.Attending).subscribe(
+      (succ) => {
+        this.ngOnInit();
+      },
+      (err) => {
+        alert('Failed to Attend Event');
+
+      }
+    );
+  }
   filterByHouse() {
     this.filteredevents = [];
     this.events.forEach((event, index) => {
-      if ( event.host.username !== this.cookie.get('username') && event.location.id !== this.useraddress) {
+      if (event.host.username !== this.cookie.get('username') && event.location.id !== this.useraddress) {
         this.filteredevents.push(event);
       }
-  });
-}
+    });
+  }
 }

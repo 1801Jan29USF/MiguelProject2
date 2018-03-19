@@ -48,11 +48,11 @@ public class UserController {
 		return us.findAllByAddress(loc);
 	}
 
-	// all events that a user has attended
-	@GetMapping("/AttendedEvents/{username}")
-	public Set<Event> attendedEvents(@PathVariable String username) {
-		return us.findAll(username);
-	}
+//	// all events that a user has attended
+//	@GetMapping("/AttendedEvents/{username}")
+//	public Set<Event> attendedEvents(@PathVariable String username) {
+//		return us.findAll(username);
+//	}
 
 	@PostMapping("/UpdateProfile/{username}")
 	public User updateProfile(@RequestBody User u, @PathVariable String username) {
